@@ -12,11 +12,6 @@ interface Request {
   password: string;
 }
 
-interface Response {
-  user: User;
-  token: string;
-}
-
 @injectable()
 class CreateUserService {
   constructor(
