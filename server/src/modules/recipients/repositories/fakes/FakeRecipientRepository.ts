@@ -25,6 +25,20 @@ class FakeRecipientRepository implements IRecipientsRepository {
     this.recipients[findIndex] = recipient;
     return recipient;
   }
+
+  public async findAll(): Promise<Recipient[]> {
+    const listRecipients = this.recipients;
+
+    return listRecipients;
+  }
+
+  public async findById(id: string): Promise<Recipient | undefined> {
+    const existentRecipient = this.recipients.find(
+      recipient => recipient.id === id,
+    );
+
+    return existentRecipient;
+  }
 }
 
 export default FakeRecipientRepository;

@@ -1,4 +1,5 @@
 import { injectable, inject } from 'tsyringe';
+
 import IRecipientsRepository from '@modules/recipients/repositories/IRecipientsRepository';
 import Recipient from '../infra/typeorm/entities/Recipient';
 

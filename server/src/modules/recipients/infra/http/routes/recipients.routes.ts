@@ -2,7 +2,6 @@ import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthentication';
-
 import RecipientsController from '@modules/recipients/infra/http/controllers/RecipientsController';
 
 const recipientsController = new RecipientsController();
@@ -25,6 +24,24 @@ recipientsRouter.post(
     },
   }),
   recipientsController.create,
+);
+
+recipientsRouter.get('/', recipientsController.index);
+
+recipientsRouter.put(
+  '/:id',
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string(),
+      street: Joi.string(),
+      number: Joi.number(),
+      addinfos: Joi.string(),
+      state: Joi.string(),
+      city: Joi.string(),
+      zipcode: Joi.string(),
+    },
+  }),
+  recipientsController.update,
 );
 
 export default recipientsRouter;

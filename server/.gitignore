@@ -8,3 +8,5 @@ ormconfig.json
 
 tmp/*
 !tmp/.gitkeep
+
+todo.md

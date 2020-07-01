@@ -22,6 +22,18 @@ class RecipientsRepository implements IRecipientsRepository {
   public async save(recipient: Recipient): Promise<Recipient> {
     return this.ormRepository.save(recipient);
   }
+
+  public async findAll(): Promise<Recipient[]> {
+    return this.ormRepository.find();
+  }
+
+  public async findById(id: string): Promise<Recipient | undefined> {
+    const recipient = await this.ormRepository.findOne({
+      where: { id },
+    });
+
+    return recipient;
+  }
 }
 
 export default RecipientsRepository;
