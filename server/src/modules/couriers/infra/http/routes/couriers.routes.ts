@@ -14,9 +14,12 @@ const upload = multer(uploadConfig.multer);
 
 couriersRouter.post('/', couriersController.create);
 
+couriersRouter.use(ensureAuthentication);
+
+couriersRouter.put('/:id', couriersController.update);
+
 couriersRouter.patch(
   '/avatar/:id',
-  ensureAuthentication,
   upload.single('avatar'),
   couriersAvatarController.update,
 );
