@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+
 import CreateDeliveryService from '@modules/deliveries/services/CreateDeliveryService';
+import ListDeliveriesService from '@modules/deliveries/services/ListDeliveriesService';
 
 export default class DeliveriesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -15,5 +17,13 @@ export default class DeliveriesController {
     });
 
     return response.json(delivery);
+  }
+
+  public async index(request: Request, response: Response): Promise<Response> {
+    const listDeliveries = container.resolve(ListDeliveriesService);
+
+    const deliveries = await listDeliveries.execute();
+
+    return response.json(deliveries);
   }
 }

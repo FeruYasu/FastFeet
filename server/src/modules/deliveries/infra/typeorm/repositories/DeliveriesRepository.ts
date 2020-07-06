@@ -22,6 +22,10 @@ class DeliveriesRepository implements IDeliveriesRepository {
   public async save(delivery: Delivery): Promise<Delivery> {
     return this.ormRepository.save(delivery);
   }
+
+  public async listAll(): Promise<Delivery[]> {
+    return this.ormRepository.find();
+  }
 }
 
 export default DeliveriesRepository;

@@ -1,20 +1,19 @@
 import { injectable, inject } from 'tsyringe';
 import IDeliveriesRepository from '../repositories/IDeliveriesRepository';
 import Delivery from '../infra/typeorm/entities/Delivery';
-import ICreateDeliveryDTO from '../dtos/ICreateDeliveryDTO';
 
 @injectable()
-class CreateDeliveryService {
+class ListDeliveriesService {
   constructor(
     @inject('DeliveriesRepository')
     private deliveriesRepository: IDeliveriesRepository,
   ) {}
 
-  public async execute(data: ICreateDeliveryDTO): Promise<Delivery> {
-    const newDelivery = await this.deliveriesRepository.create(data);
+  public async execute(): Promise<Delivery[]> {
+    const deliveries = await this.deliveriesRepository.listAll();
 
-    return newDelivery;
+    return deliveries;
   }
 }
 
-export default CreateDeliveryService;
+export default ListDeliveriesService;

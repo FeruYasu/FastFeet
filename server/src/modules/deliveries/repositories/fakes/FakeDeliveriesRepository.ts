@@ -25,6 +25,10 @@ class FakeDeliveriesRepository implements IDeliveriesRepository {
     this.deliveries[findIndex] = delivery;
     return delivery;
   }
+
+  public async listAll(): Promise<Delivery[]> {
+    return this.deliveries;
+  }
 }
 
 export default FakeDeliveriesRepository;
