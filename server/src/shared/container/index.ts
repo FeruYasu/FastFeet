@@ -12,6 +12,9 @@ import RecipientsRepository from '@modules/recipients/infra/typeorm/repositories
 import ICouriersRepository from '@modules/couriers/repositories/ICouriersRepository';
 import CouriersRepository from '@modules/couriers/infra/typeorm/repositories/CouriersRepository';
 
+import IDeliveriesRepository from '@modules/deliveries/repositories/IDeliveriesRepository';
+import DeliveriesRepository from '@modules/deliveries/infra/typeorm/repositories/DeliveriesRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -25,4 +28,9 @@ container.registerSingleton<IRecipientsRepository>(
 container.registerSingleton<ICouriersRepository>(
   'CouriersRepository',
   CouriersRepository,
+);
+
+container.registerSingleton<IDeliveriesRepository>(
+  'DeliveriesRepository',
+  DeliveriesRepository,
 );
