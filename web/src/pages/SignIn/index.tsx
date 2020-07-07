@@ -42,10 +42,13 @@ const SignIn: React.FC = () => {
         });
 
         await schema.validate(data, { abortEarly: false });
+
         await signIn({
           email: data.email,
           password: data.password,
         });
+
+        setLoading(false);
 
         history.push('/dashboard');
       } catch (err) {
