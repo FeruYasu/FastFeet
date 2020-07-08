@@ -24,7 +24,11 @@ class DeliveriesRepository implements IDeliveriesRepository {
   }
 
   public async listAll(): Promise<Delivery[]> {
-    return this.ormRepository.find();
+    return this.ormRepository.find({ relations: ['courier', 'recipient'] });
+  }
+
+  public async deleteById(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
   }
 }
 
