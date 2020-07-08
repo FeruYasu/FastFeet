@@ -6,6 +6,7 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     outline: 0;
+    font-family: 'Roboto', serif;
   }
 
   body {
@@ -15,7 +16,7 @@ export default createGlobalStyle`
   }
 
   body, input, button {
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Roboto', serif;
     font-size: 16px;
   }
 
@@ -25,5 +26,13 @@ export default createGlobalStyle`
 
   button{
     cursor: pointer;
+  }
+
+  a{
+    text-decoration:none;
+  }
+
+  li{
+    list-style-type: none;
   }
 `;

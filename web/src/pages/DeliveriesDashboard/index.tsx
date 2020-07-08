@@ -68,8 +68,6 @@ const DeliveriesDashboard: React.FC = () => {
         courierInitials: delivery.courier.name.match(/\b\w/g) || [].join(''),
       }));
 
-      console.log(data);
-
       setDeliveries(data);
     }
 
@@ -78,20 +76,22 @@ const DeliveriesDashboard: React.FC = () => {
 
   const handleVisible = useCallback(
     (id: number) => {
+      let modal = id;
       if (open === id) {
-        id = 0;
+        modal = 0;
       }
-      setOpen(id);
+      setOpen(modal);
     },
     [open],
   );
 
   const handleView = useCallback(
     (id: number) => {
+      let modal = id;
       if (modalopen === id) {
-        id = 0;
+        modal = 0;
       }
-      setModalOpen(id);
+      setModalOpen(modal);
       setOpen(0);
     },
     [modalopen],
