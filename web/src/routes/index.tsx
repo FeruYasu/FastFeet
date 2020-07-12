@@ -5,6 +5,7 @@ import Route from './Route';
 
 import SignIn from '../pages/SignIn';
 import DeliveriesDashboard from '../pages/DeliveriesDashboard';
+import HandleDelivery from '../pages/HandleDelivery';
 
 const Routes: React.FC = () => {
   return (
@@ -16,6 +17,8 @@ const Routes: React.FC = () => {
         isPrivate
         exact
       />
+      <Route path="/deliveries/edit/:id" component={HandleDelivery} isPrivate />
+      <Route path="/deliveries/new" component={HandleDelivery} isPrivate />
     </Switch>
   );
 };
