@@ -33,6 +33,10 @@ class CouriersRepository implements ICouriersRepository {
 
     return courier;
   }
+
+  public async listAll(): Promise<Courier[]> {
+    return this.ormRepository.find();
+  }
 }
 
 export default CouriersRepository;

@@ -13,6 +13,7 @@ const couriersAvatarController = new CouriersAvatarController();
 const upload = multer(uploadConfig.multer);
 
 couriersRouter.post('/', couriersController.create);
+couriersRouter.get('/', couriersController.index);
 
 couriersRouter.use(ensureAuthentication);
 

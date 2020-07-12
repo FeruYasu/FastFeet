@@ -6,4 +6,5 @@ export default interface ICourierRepository {
   save(user: Courier): Promise<Courier>;
   findByEmail(email: string): Promise<Courier | undefined>;
   findById(id: string): Promise<Courier | undefined>;
+  listAll(): Promise<Courier[]>;
 }

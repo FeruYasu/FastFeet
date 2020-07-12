@@ -36,6 +36,10 @@ class FakeCouriersRepository implements ICouriersRepository {
 
     return findCourier;
   }
+
+  public async listAll(): Promise<Courier[]> {
+    return this.couriers;
+  }
 }
 
 export default FakeCouriersRepository;

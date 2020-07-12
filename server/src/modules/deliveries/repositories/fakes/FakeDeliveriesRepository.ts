@@ -29,6 +29,14 @@ class FakeDeliveriesRepository implements IDeliveriesRepository {
   public async listAll(): Promise<Delivery[]> {
     return this.deliveries;
   }
+
+  public async deleteById(id: string): Promise<void> {
+    const newArray = this.deliveries.filter(
+      findDelivery => findDelivery.id !== id,
+    );
+
+    this.deliveries = newArray;
+  }
 }
 
 export default FakeDeliveriesRepository;

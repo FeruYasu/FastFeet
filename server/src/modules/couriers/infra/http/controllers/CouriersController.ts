@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import CreateCourierService from '@modules/couriers/services/CreateCourierService';
 import UpdateCourierService from '@modules/couriers/services/UpdateCourierService';
+import ListCouriersService from '@modules/couriers/services/ListCouriersService';
 
 export default class CouriersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -31,5 +32,13 @@ export default class CouriersController {
     });
 
     return response.json(courier);
+  }
+
+  public async index(request: Request, response: Response): Promise<Response> {
+    const listCouriersService = container.resolve(ListCouriersService);
+
+    const listCouriers = await listCouriersService.execute();
+
+    return response.json(listCouriers);
   }
 }
