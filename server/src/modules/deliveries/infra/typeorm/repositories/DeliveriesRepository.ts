@@ -27,8 +27,39 @@ class DeliveriesRepository implements IDeliveriesRepository {
     return this.ormRepository.find({ relations: ['courier', 'recipient'] });
   }
 
+  public async listById(id: string): Promise<Delivery | undefined> {
+    const delivery = await this.ormRepository.findOne({
+      where: {
+        id,
+      },
+      relations: ['courier', 'recipient'],
+    });
+
+    return delivery;
+  }
+
   public async deleteById(id: string): Promise<void> {
     await this.ormRepository.delete(id);
+  }
+
+  public async updateById(
+    id: string,
+    data: ICreateDeliveryDTO,
+  ): Promise<Delivery | undefined> {
+    const delivery = await this.ormRepository.findOne({
+      where: {
+        id,
+      },
+      relations: ['courier', 'recipient'],
+    });
+
+    if (delivery) {
+      delivery.recipient_id = data.recipient_id;
+      delivery.courier_id = data.courier_id;
+      delivery.product = data.product;
+    }
+
+    return delivery;
   }
 }
 

@@ -3,7 +3,9 @@ import { container } from 'tsyringe';
 
 import CreateDeliveryService from '@modules/deliveries/services/CreateDeliveryService';
 import ListDeliveriesService from '@modules/deliveries/services/ListDeliveriesService';
+import ListDeliveryByIdService from '@modules/deliveries/services/ListDeliveryByIdService';
 import DeleteDeliveryService from '@modules/deliveries/services/DeleteDeliveryService';
+import UpdateDeliveryService from '@modules/deliveries/services/UpdateDeliveryService';
 
 export default class DeliveriesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -28,6 +30,15 @@ export default class DeliveriesController {
     return response.json(deliveries);
   }
 
+  public async show(request: Request, response: Response): Promise<Response> {
+    const listDeliveries = container.resolve(ListDeliveryByIdService);
+    const { id } = request.params;
+
+    const deliveries = await listDeliveries.execute(id);
+
+    return response.json(deliveries);
+  }
+
   public async destroy(
     request: Request,
     response: Response,
@@ -39,5 +50,19 @@ export default class DeliveriesController {
     await deleteDelivery.execute(id);
 
     return response.status(204).json({ message: 'deleted' });
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const updateDelivery = container.resolve(UpdateDeliveryService);
+    const { id } = request.params;
+    const { recipient_id, courier_id, product } = request.body;
+
+    const deliveries = await updateDelivery.execute(id, {
+      recipient_id,
+      courier_id,
+      product,
+    });
+
+    return response.json(deliveries);
   }
 }
