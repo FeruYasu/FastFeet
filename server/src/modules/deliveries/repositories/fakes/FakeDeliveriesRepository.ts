@@ -60,6 +60,16 @@ class FakeDeliveriesRepository implements IDeliveriesRepository {
 
     return this.deliveries[findIndex];
   }
+
+  public async filterByProduct(
+    product: string,
+  ): Promise<Delivery[] | undefined> {
+    const filtered = this.deliveries.filter(findDelivery =>
+      findDelivery.product.includes(product),
+    );
+
+    return filtered;
+  }
 }
 
 export default FakeDeliveriesRepository;

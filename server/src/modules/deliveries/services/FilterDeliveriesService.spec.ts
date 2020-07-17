@@ -7,18 +7,18 @@ import CreateCourierService from '@modules/couriers/services/CreateCourierServic
 import FakeDeliveriesRepository from '../repositories/fakes/FakeDeliveriesRepository';
 import CreateDeliveryService from './CreateDeliveryService';
 
-import ListDeliveryByIdService from './ListDeliveryByIdService';
+import FilterDeliveriesService from './FilterDeliveriesService';
 
 let createDelivery: CreateDeliveryService;
 let createRecipient: CreateRecipientService;
 let createCourier: CreateCourierService;
-let listDeliveryById: ListDeliveryByIdService;
+let filterDelivery: FilterDeliveriesService;
 
 let fakeDeliveriesRepository: FakeDeliveriesRepository;
 let fakeRecipientRepository: FakeRecipientsRepository;
 let fakeCourierRepository: FakeCouriersRepository;
 
-describe('ListDeliveryById', () => {
+describe('FilterDelivery', () => {
   beforeEach(() => {
     fakeDeliveriesRepository = new FakeDeliveriesRepository();
     fakeRecipientRepository = new FakeRecipientsRepository();
@@ -27,10 +27,10 @@ describe('ListDeliveryById', () => {
     createDelivery = new CreateDeliveryService(fakeDeliveriesRepository);
     createRecipient = new CreateRecipientService(fakeRecipientRepository);
     createCourier = new CreateCourierService(fakeCourierRepository);
-    listDeliveryById = new ListDeliveryByIdService(fakeDeliveriesRepository);
+    filterDelivery = new FilterDeliveriesService(fakeDeliveriesRepository);
   });
 
-  it('should be able to list all deliveries', async () => {
+  it('should be able to list all deliveries that matchs the query', async () => {
     const recipient = await createRecipient.execute({
       name: 'Joao Paulo',
       street: 'Rua sete de setembro',
@@ -51,14 +51,18 @@ describe('ListDeliveryById', () => {
       courier_id: courier.id,
     });
 
-    await createDelivery.execute({
+    const delivery2 = await createDelivery.execute({
       product: 'Produto2',
       recipient_id: recipient.id,
       courier_id: courier.id,
     });
 
-    const justOneDelivery = await listDeliveryById.execute(delivery1.id);
+    const filteredDelivery1 = await filterDelivery.execute('1');
+    const filteredDelivery2 = await filterDelivery.execute('2');
+    const filteredDelivery3 = await filterDelivery.execute('Pro');
 
-    expect(justOneDelivery).toEqual(delivery1);
+    expect(filteredDelivery1).toEqual([delivery1]);
+    expect(filteredDelivery2).toEqual([delivery2]);
+    expect(filteredDelivery3).toEqual([delivery1, delivery2]);
   });
 });

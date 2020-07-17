@@ -6,6 +6,7 @@ import ListDeliveriesService from '@modules/deliveries/services/ListDeliveriesSe
 import ListDeliveryByIdService from '@modules/deliveries/services/ListDeliveryByIdService';
 import DeleteDeliveryService from '@modules/deliveries/services/DeleteDeliveryService';
 import UpdateDeliveryService from '@modules/deliveries/services/UpdateDeliveryService';
+import FilterDeliveriesService from '@modules/deliveries/services/FilterDeliveriesService';
 
 export default class DeliveriesController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -23,9 +24,19 @@ export default class DeliveriesController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const listDeliveries = container.resolve(ListDeliveriesService);
+    const { product } = request.query;
 
-    const deliveries = await listDeliveries.execute();
+    let deliveries;
+
+    if (!product) {
+      const listDeliveries = container.resolve(ListDeliveriesService);
+
+      deliveries = await listDeliveries.execute();
+    } else {
+      const filterDelivery = container.resolve(FilterDeliveriesService);
+
+      deliveries = await filterDelivery.execute(product);
+    }
 
     return response.json(deliveries);
   }
