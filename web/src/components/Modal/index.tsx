@@ -20,10 +20,10 @@ interface Data {
 
 interface ModalProps {
   data: Data;
-  handleview: any;
+  handleView: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ data, handleview }) => {
+const Modal: React.FC<ModalProps> = ({ data, handleView }) => {
   let startDate = null;
   let endDate = null;
 
@@ -41,7 +41,7 @@ const Modal: React.FC<ModalProps> = ({ data, handleview }) => {
 
   return (
     <Container>
-      <ModalBackground onClick={() => handleview()} />
+      <ModalBackground onClick={() => handleView()} />
       <ModalContent>
         <h4>Informações da encomenda</h4>
         <p>

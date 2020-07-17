@@ -2,13 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import {
-  Link,
-  RouteComponentProps,
-  withRouter,
-  useLocation,
-  useParams,
-} from 'react-router-dom';
+import { Link, withRouter, useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import AsyncSelect from '../../components/AsyncSelect';
 import Header from '../../components/Header';
@@ -36,12 +30,18 @@ interface Recipient {
   id: number;
 }
 
+interface Options {
+  value: string;
+  label: string;
+}
+
 const HandleDelivery: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const [courier, setCourier] = useState<Courier>();
-  const [recipient, setRecipient] = useState<Recipient>();
+  const [courier, setCourier] = useState<Options[]>();
+  const [recipient, setRecipient] = useState<Options[]>();
+  const [title, setTitle] = useState('Nova encomenda');
+
   const history = useHistory();
-  const location = useLocation();
   const { id } = useParams();
 
   useEffect(() => {
@@ -54,12 +54,12 @@ const HandleDelivery: React.FC = () => {
         });
 
         formRef.current.setFieldValue('recipient_id', {
-          value: response.data.Recipient.id,
-          label: response.data.Recipient.name,
+          value: response.data.recipient.id,
+          label: response.data.recipient.name,
         });
         formRef.current.setFieldValue('courier_id', {
-          value: response.data.Courier.id,
-          label: response.data.Courier.name,
+          value: response.data.courier.id,
+          label: response.data.courier.name,
         });
       }
     }
@@ -76,7 +76,7 @@ const HandleDelivery: React.FC = () => {
     }
 
     async function loadRecipient(): Promise<void> {
-      const response = await api.get('recipients');
+      const response = await api.get('/recipients');
 
       const recipientlist = response.data.map((recipientdata: Recipient) => ({
         label: recipientdata.name,
@@ -87,8 +87,10 @@ const HandleDelivery: React.FC = () => {
     }
 
     if (id) {
-      loadDelivery();
+      setTitle('Edição de encomendas');
     }
+
+    loadDelivery();
     loadRecipient();
     loadCourier();
   }, [id]);
@@ -100,6 +102,7 @@ const HandleDelivery: React.FC = () => {
         history.push('/deliveries');
       } else {
         await api.post('deliveries', formRef.current.getData());
+        history.push('/deliveries');
       }
     }
   }, [history, id]);
@@ -111,7 +114,7 @@ const HandleDelivery: React.FC = () => {
         <Content>
           <Form ref={formRef} onSubmit={handleSubmit}>
             <TitleContainer>
-              <h1>{location.pathname}</h1>
+              <h1>{title}</h1>
               <ButtonsContainer>
                 <Link to="/deliveries">
                   <BackButton>
@@ -133,6 +136,7 @@ const HandleDelivery: React.FC = () => {
                   <AsyncSelect
                     name="recipient_id"
                     placeholder="Selecione um destinatário..."
+                    options={recipient}
                   />
                 </div>
                 <div>
@@ -140,6 +144,7 @@ const HandleDelivery: React.FC = () => {
                   <AsyncSelect
                     name="courier_id"
                     placeholder="Selecione um entregador..."
+                    options={courier}
                   />
                 </div>
               </SelectContainer>

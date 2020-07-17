@@ -10,6 +10,7 @@ export const Container = styled.div<ContainerProps>`
   background:  #fff;
   border-radius: 10px;
   padding: 16px;
+  padding-left: 0px;
   width: 80%;
   display: flex;
   align-items: center;

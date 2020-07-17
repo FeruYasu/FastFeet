@@ -8,20 +8,19 @@ import { Container, ActionsPanel, ActionList, Action } from './styles';
 
 interface ActionsProps extends RouteComponentProps {
   id: number;
-  handleview: any;
-  handledelete: any;
-  view: any;
-  edit: any;
+  handleView: (id: number) => void;
+  handleDelete: (id: number) => void;
+  view: boolean;
+  edit: boolean;
   path: string;
-  exclude: any;
-  cancel?: any;
-  title: string;
+  exclude: boolean;
+  cancel?: boolean;
 }
 
 const Actions: React.FC<ActionsProps> = ({
   id,
-  handleview,
-  handledelete,
+  handleView,
+  handleDelete,
   view,
   edit,
   path,
@@ -34,7 +33,7 @@ const Actions: React.FC<ActionsProps> = ({
         <ActionList>
           {view && (
             <Action>
-              <button type="button" onClick={() => handleview(id)}>
+              <button type="button" onClick={() => handleView(id)}>
                 <MdVisibility size={16} color="#8E5BE8" />
                 <p>Visualizar</p>
               </button>
@@ -57,7 +56,7 @@ const Actions: React.FC<ActionsProps> = ({
           <hr />
           {exclude && (
             <Action>
-              <button type="button" onClick={() => handledelete(id)}>
+              <button type="button" onClick={() => handleDelete(id)}>
                 <MdDeleteForever size={16} color="#DE3B3B" />
                 <p>Excluir</p>
               </button>
@@ -65,7 +64,7 @@ const Actions: React.FC<ActionsProps> = ({
           )}
           {cancel && (
             <Action>
-              <button type="button" onClick={() => handledelete(id)}>
+              <button type="button" onClick={() => handleDelete(id)}>
                 <MdDeleteForever size={16} color="#DE3B3B" />
                 <p>Cancelar encomenda</p>
               </button>

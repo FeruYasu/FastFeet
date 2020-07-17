@@ -60,7 +60,11 @@ const DeliveriesDashboard: React.FC = () => {
 
   useEffect(() => {
     async function loadDeliveries(): Promise<void> {
-      const response = await api.get('/deliveries');
+      const response = await api.get('/deliveries', {
+        params: {
+          product: query,
+        },
+      });
 
       const data = response.data.map((delivery: Delivery) => ({
         ...delivery,
@@ -173,10 +177,9 @@ const DeliveriesDashboard: React.FC = () => {
                   {open === delivery.id && (
                     <Actions
                       id={open}
-                      handleview={() => handleView(delivery.id)}
-                      handledelete={() => handleDelete(delivery.id)}
+                      handleView={() => handleView(delivery.id)}
+                      handleDelete={() => handleDelete(delivery.id)}
                       path="/deliveries/edit"
-                      title="Edição de encomendas"
                       view
                       edit
                       exclude
@@ -184,7 +187,7 @@ const DeliveriesDashboard: React.FC = () => {
                   )}
                 </div>
                 {modalopen === delivery.id && (
-                  <Modal data={delivery} handleview={() => handleView(0)} />
+                  <Modal data={delivery} handleView={() => handleView(0)} />
                 )}
               </li>
             ))}
