@@ -36,7 +36,7 @@ describe('UpdateCourier', () => {
   it('should not be able to create a Courier with nonexistent id', async () => {
     await expect(
       updateCourier.execute({
-        id: 'wrongid',
+        id: 33333,
         name: 'Entregador2',
         email: 'entregador1@email.com',
       }),

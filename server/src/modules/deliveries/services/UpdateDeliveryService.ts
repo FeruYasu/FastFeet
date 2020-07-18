@@ -11,7 +11,7 @@ class UpdateDeliveryService {
   ) {}
 
   public async execute(
-    id: string,
+    id: number,
     data: ICreateDeliveryDTO,
   ): Promise<Delivery | undefined> {
     const updateDelivery = await this.deliveriesRepository.updateById(id, data);

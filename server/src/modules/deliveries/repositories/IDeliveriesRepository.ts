@@ -4,12 +4,12 @@ import ICreateDeliveryDTO from '../dtos/ICreateDeliveryDTO';
 export default interface IDeliveriesRepository {
   create(data: ICreateDeliveryDTO): Promise<Delivery>;
   save(data: Delivery): Promise<Delivery>;
-  deleteById(id: string): Promise<void>;
+  deleteById(id: number): Promise<void>;
   updateById(
-    id: string,
+    id: number,
     data: ICreateDeliveryDTO,
   ): Promise<Delivery | undefined>;
   listAll(): Promise<Delivery[]>;
-  listById(id: string): Promise<Delivery | undefined>;
+  listById(id: number): Promise<Delivery | undefined>;
   filterByProduct(product: string): Promise<Delivery[] | undefined>;
 }

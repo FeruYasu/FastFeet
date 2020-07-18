@@ -7,7 +7,7 @@ import ICouriersRepository from '../repositories/ICouriersRepository';
 import Courier from '../infra/typeorm/entities/Courier';
 
 interface IRequest {
-  courier_id: string;
+  courier_id: number;
   avatarFilename: string;
 }
 

@@ -35,7 +35,7 @@ describe('UpdateCourierAvatar', () => {
   it('should not be able to update avatar from nonexistent courier', async () => {
     await expect(
       updateUserAvatar.execute({
-        courier_id: 'nonexistent-courier',
+        courier_id: 45252,
         avatarFilename: 'avatar.jpg',
       }),
     ).rejects.toBeInstanceOf(AppError);

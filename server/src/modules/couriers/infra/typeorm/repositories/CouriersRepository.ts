@@ -1,5 +1,5 @@
 import ICouriersRepository from '@modules/couriers/repositories/ICouriersRepository';
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, Like } from 'typeorm';
 import ICreateCourierDTO from '@modules/couriers/dtos/ICreateCourierDTO';
 import Courier from '../entities/Courier';
 
@@ -28,7 +28,7 @@ class CouriersRepository implements ICouriersRepository {
     return courier;
   }
 
-  public async findById(id: string): Promise<Courier | undefined> {
+  public async findById(id: number): Promise<Courier | undefined> {
     const courier = await this.ormRepository.findOne({ where: { id } });
 
     return courier;
@@ -36,6 +36,20 @@ class CouriersRepository implements ICouriersRepository {
 
   public async listAll(): Promise<Courier[]> {
     return this.ormRepository.find();
+  }
+
+  public async deleteById(id: number): Promise<void> {
+    await this.ormRepository.delete(id);
+  }
+
+  public async filterByName(name: string): Promise<Courier[] | undefined> {
+    const couriers = await this.ormRepository.find({
+      where: {
+        name: Like(`%${name}%`),
+      },
+    });
+
+    return couriers;
   }
 }
 

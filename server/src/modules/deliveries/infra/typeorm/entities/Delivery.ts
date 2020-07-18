@@ -13,13 +13,13 @@ import Courier from '@modules/couriers/infra/typeorm/entities/Courier';
 @Entity('deliveries')
 class Delivery {
   @PrimaryColumn()
-  id: string;
+  id: number;
 
   @Column()
-  recipient_id: string;
+  recipient_id: number;
 
   @Column()
-  courier_id: string;
+  courier_id: number;
 
   @OneToOne(() => Recipient)
   @JoinColumn({ name: 'recipient_id' })

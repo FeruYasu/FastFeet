@@ -9,7 +9,7 @@ import {
 @Entity('couriers')
 class Courier {
   @PrimaryColumn()
-  id: string;
+  id: number;
 
   @Column()
   name: string;

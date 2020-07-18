@@ -5,7 +5,7 @@ import ICouriersRepository from '../repositories/ICouriersRepository';
 import Courier from '../infra/typeorm/entities/Courier';
 
 interface UpdateCourierDTO {
-  id: string;
+  id: number;
   name: string;
   email: string;
 }

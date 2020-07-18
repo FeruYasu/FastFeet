@@ -9,7 +9,7 @@ class ListDeliveriesService {
     private deliveriesRepository: IDeliveriesRepository,
   ) {}
 
-  public async execute(id: string): Promise<Delivery | undefined> {
+  public async execute(id: number): Promise<Delivery | undefined> {
     const delivery = await this.deliveriesRepository.listById(id);
 
     return delivery;

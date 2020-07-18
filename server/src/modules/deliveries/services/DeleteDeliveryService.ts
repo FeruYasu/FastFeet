@@ -8,7 +8,7 @@ class DeleteDeliveryService {
     private deliveriesRepository: IDeliveriesRepository,
   ) {}
 
-  public async execute(id: string): Promise<void> {
+  public async execute(id: number): Promise<void> {
     await this.deliveriesRepository.deleteById(id);
   }
 }

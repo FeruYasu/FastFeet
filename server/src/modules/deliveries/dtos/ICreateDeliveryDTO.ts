@@ -1,5 +1,5 @@
 export default interface ICreateDeliveryDTO {
-  recipient_id: string;
-  courier_id: string;
+  recipient_id: number;
+  courier_id: number;
   product: string;
 }

@@ -21,11 +21,11 @@ export default class CreateDeliveries1593952965281
           },
           {
             name: 'recipient_id',
-            type: 'uuid',
+            type: 'int',
           },
           {
             name: 'courier_id',
-            type: 'uuid',
+            type: 'int',
           },
           {
             name: 'signature',

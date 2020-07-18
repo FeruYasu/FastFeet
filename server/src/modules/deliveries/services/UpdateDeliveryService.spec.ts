@@ -53,15 +53,15 @@ describe('CreateDelivery', () => {
 
     const updatedDelivery = await updateDelivery.execute(delivery.id, {
       product: 'Product Updated',
-      recipient_id: 'new recipient ID',
-      courier_id: 'new courier ID',
+      recipient_id: 4,
+      courier_id: 4,
     });
 
     expect(updatedDelivery).toEqual({
       id: delivery.id,
       product: 'Product Updated',
-      recipient_id: 'new recipient ID',
-      courier_id: 'new courier ID',
+      recipient_id: 4,
+      courier_id: 4,
     });
   });
 });

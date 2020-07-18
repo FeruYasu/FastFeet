@@ -1,6 +1,5 @@
 import Delivery from '@modules/deliveries/infra/typeorm/entities/Delivery';
 import ICreateDeliveryDTO from '@modules/deliveries/dtos/ICreateDeliveryDTO';
-import { uuid } from 'uuidv4';
 
 import IDeliveriesRepository from '../IDeliveriesRepository';
 
@@ -10,7 +9,7 @@ class FakeDeliveriesRepository implements IDeliveriesRepository {
   public async create(data: ICreateDeliveryDTO): Promise<Delivery> {
     const delivery = new Delivery();
 
-    Object.assign(delivery, { id: uuid() }, data);
+    Object.assign(delivery, { id: this.deliveries.length + 1 }, data);
 
     this.deliveries.push(delivery);
 
@@ -30,7 +29,7 @@ class FakeDeliveriesRepository implements IDeliveriesRepository {
     return this.deliveries;
   }
 
-  public async deleteById(id: string): Promise<void> {
+  public async deleteById(id: number): Promise<void> {
     const newArray = this.deliveries.filter(
       findDelivery => findDelivery.id !== id,
     );
@@ -38,7 +37,7 @@ class FakeDeliveriesRepository implements IDeliveriesRepository {
     this.deliveries = newArray;
   }
 
-  public async listById(id: string): Promise<Delivery | undefined> {
+  public async listById(id: number): Promise<Delivery | undefined> {
     const findIndex = this.deliveries.findIndex(
       findDelivery => findDelivery.id === id,
     );
@@ -47,7 +46,7 @@ class FakeDeliveriesRepository implements IDeliveriesRepository {
   }
 
   public async updateById(
-    id: string,
+    id: number,
     data: ICreateDeliveryDTO,
   ): Promise<Delivery | undefined> {
     const findIndex = this.deliveries.findIndex(

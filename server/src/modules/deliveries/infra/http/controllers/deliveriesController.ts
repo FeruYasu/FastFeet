@@ -45,7 +45,7 @@ export default class DeliveriesController {
     const listDeliveries = container.resolve(ListDeliveryByIdService);
     const { id } = request.params;
 
-    const deliveries = await listDeliveries.execute(id);
+    const deliveries = await listDeliveries.execute(Number(id));
 
     return response.json(deliveries);
   }
@@ -58,7 +58,7 @@ export default class DeliveriesController {
 
     const deleteDelivery = container.resolve(DeleteDeliveryService);
 
-    await deleteDelivery.execute(id);
+    await deleteDelivery.execute(Number(id));
 
     return response.status(204).json({ message: 'deleted' });
   }
@@ -68,7 +68,7 @@ export default class DeliveriesController {
     const { id } = request.params;
     const { recipient_id, courier_id, product } = request.body;
 
-    const deliveries = await updateDelivery.execute(id, {
+    const deliveries = await updateDelivery.execute(Number(id), {
       recipient_id,
       courier_id,
       product,

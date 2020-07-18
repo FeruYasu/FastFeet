@@ -1,6 +1,5 @@
 import ICreateCourierDTO from '@modules/couriers/dtos/ICreateCourierDTO';
 import Courier from '@modules/couriers/infra/typeorm/entities/Courier';
-import { uuid } from 'uuidv4';
 import ICouriersRepository from '../ICouriersRepository';
 
 class FakeCouriersRepository implements ICouriersRepository {
@@ -9,7 +8,7 @@ class FakeCouriersRepository implements ICouriersRepository {
   public async create(data: ICreateCourierDTO): Promise<Courier> {
     const courier = new Courier();
 
-    Object.assign(courier, { id: uuid() }, data);
+    Object.assign(courier, { id: this.couriers.length + 1 }, data);
 
     this.couriers.push(courier);
 
@@ -31,7 +30,7 @@ class FakeCouriersRepository implements ICouriersRepository {
     return findCourier;
   }
 
-  public async findById(id: string): Promise<Courier | undefined> {
+  public async findById(id: number): Promise<Courier | undefined> {
     const findCourier = this.couriers.find(courier => courier.id === id);
 
     return findCourier;
@@ -39,6 +38,20 @@ class FakeCouriersRepository implements ICouriersRepository {
 
   public async listAll(): Promise<Courier[]> {
     return this.couriers;
+  }
+
+  public async deleteById(id: number): Promise<void> {
+    const newArray = this.couriers.filter(findCourier => findCourier.id !== id);
+
+    this.couriers = newArray;
+  }
+
+  public async filterByName(name: string): Promise<Courier[] | undefined> {
+    const filtered = this.couriers.filter(findDelivery =>
+      findDelivery.name.includes(name),
+    );
+
+    return filtered;
   }
 }
 

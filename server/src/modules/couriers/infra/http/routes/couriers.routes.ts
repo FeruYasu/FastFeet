@@ -14,10 +14,12 @@ const upload = multer(uploadConfig.multer);
 
 couriersRouter.post('/', couriersController.create);
 couriersRouter.get('/', couriersController.index);
+couriersRouter.get('/:id', couriersController.show);
 
 couriersRouter.use(ensureAuthentication);
 
 couriersRouter.put('/:id', couriersController.update);
+couriersRouter.delete('/:id', couriersController.destroy);
 
 couriersRouter.patch(
   '/avatar/:id',

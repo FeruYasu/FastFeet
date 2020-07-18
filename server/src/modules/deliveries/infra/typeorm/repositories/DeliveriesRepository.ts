@@ -3,7 +3,6 @@ import ICreateDeliveryDTO from '@modules/deliveries/dtos/ICreateDeliveryDTO';
 import { Repository, getRepository, Like } from 'typeorm';
 import IDeliveriesRepository from '@modules/deliveries/repositories/IDeliveriesRepository';
 import Delivery from '../entities/Delivery';
-import deliveriesRouter from '../../http/routes/deliveries.routes';
 
 class DeliveriesRepository implements IDeliveriesRepository {
   private ormRepository: Repository<Delivery>;
@@ -28,7 +27,7 @@ class DeliveriesRepository implements IDeliveriesRepository {
     return this.ormRepository.find({ relations: ['courier', 'recipient'] });
   }
 
-  public async listById(id: string): Promise<Delivery | undefined> {
+  public async listById(id: number): Promise<Delivery | undefined> {
     const delivery = await this.ormRepository.findOne({
       where: {
         id,
@@ -39,12 +38,12 @@ class DeliveriesRepository implements IDeliveriesRepository {
     return delivery;
   }
 
-  public async deleteById(id: string): Promise<void> {
+  public async deleteById(id: number): Promise<void> {
     await this.ormRepository.delete(id);
   }
 
   public async updateById(
-    id: string,
+    id: number,
     data: ICreateDeliveryDTO,
   ): Promise<Delivery | undefined> {
     const delivery = await this.ormRepository.findOne({
