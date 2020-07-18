@@ -8,9 +8,8 @@ import { Container, ActionsPanel, ActionList, Action } from './styles';
 
 interface ActionsProps extends RouteComponentProps {
   id: number;
-  handleView: (id: number) => void;
+  handleView?: (id: number) => void;
   handleDelete: (id: number) => void;
-  view: boolean;
   edit: boolean;
   path: string;
   exclude: boolean;
@@ -21,7 +20,6 @@ const Actions: React.FC<ActionsProps> = ({
   id,
   handleView,
   handleDelete,
-  view,
   edit,
   path,
   exclude,
@@ -31,7 +29,7 @@ const Actions: React.FC<ActionsProps> = ({
     <Container>
       <ActionsPanel>
         <ActionList>
-          {view && (
+          {handleView && (
             <Action>
               <button type="button" onClick={() => handleView(id)}>
                 <MdVisibility size={16} color="#8E5BE8" />

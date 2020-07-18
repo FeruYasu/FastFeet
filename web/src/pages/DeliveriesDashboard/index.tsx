@@ -101,19 +101,22 @@ const DeliveriesDashboard: React.FC = () => {
     [modalopen],
   );
 
-  async function handleDelete(id: number): Promise<void> {
-    if (window.confirm('Deseja excluir?')) {
-      const { status } = await api.delete(`deliveries/${id}`);
+  const handleDelete = useCallback(
+    async (id: number) => {
+      if (window.confirm('Deseja excluir?')) {
+        const { status } = await api.delete(`deliveries/${id}`);
 
-      if (status === 204) {
-        setDeliveries(
-          deliveries.filter((delivery: Delivery) => delivery.id !== id),
-        );
-      } else {
-        // toast.error('Não possível remover a encomenda. Tente novamente');
+        if (status === 204) {
+          setDeliveries(
+            deliveries.filter((delivery: Delivery) => delivery.id !== id),
+          );
+        } else {
+          // toast.error('Não possível remover a encomenda. Tente novamente');
+        }
       }
-    }
-  }
+    },
+    [deliveries],
+  );
 
   const handleFilter = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -180,7 +183,6 @@ const DeliveriesDashboard: React.FC = () => {
                       handleView={() => handleView(delivery.id)}
                       handleDelete={() => handleDelete(delivery.id)}
                       path="/deliveries/edit"
-                      view
                       edit
                       exclude
                     />

@@ -4,11 +4,14 @@ import { NavLink } from 'react-router-dom';
 import logo from '../../assets/fastfeet-logo.png';
 
 import { Container, Content, Profile, Name } from './styles';
+import { useAuth } from '../../hooks/Auth';
 
 const Header: React.FC = () => {
+  const { signOut } = useAuth();
+
   const handleLogout = useCallback(() => {
-    console.log('oi');
-  }, []);
+    signOut();
+  }, [signOut]);
 
   return (
     <Container>

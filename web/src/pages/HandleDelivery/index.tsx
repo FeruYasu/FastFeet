@@ -99,11 +99,11 @@ const HandleDelivery: React.FC = () => {
     if (formRef.current) {
       if (id) {
         await api.put(`deliveries/${id}`, formRef.current.getData());
-        history.push('/deliveries');
       } else {
         await api.post('deliveries', formRef.current.getData());
-        history.push('/deliveries');
       }
+
+      history.push('/deliveries');
     }
   }, [history, id]);
 
