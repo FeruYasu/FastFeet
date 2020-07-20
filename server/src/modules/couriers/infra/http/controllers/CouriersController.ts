@@ -8,6 +8,8 @@ import DeleteCourierService from '@modules/couriers/services/DeleteCourierServic
 import ListCourierByIdService from '@modules/couriers/services/ListCourierByIdService';
 import FilterCourierByNameService from '@modules/couriers/services/FilterCourierByNameService';
 
+import { classToClass } from 'class-transformer';
+
 export default class CouriersController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, email } = request.body;
@@ -34,7 +36,7 @@ export default class CouriersController {
       name,
     });
 
-    return response.json(courier);
+    return response.json(classToClass(courier));
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
@@ -52,7 +54,7 @@ export default class CouriersController {
       couriers = await filterCourierByName.execute(name);
     }
 
-    return response.json(couriers);
+    return response.json(classToClass(couriers));
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
@@ -62,7 +64,7 @@ export default class CouriersController {
 
     const courier = await listCourierById.execute(Number(id));
 
-    return response.json(courier);
+    return response.json(classToClass(courier));
   }
 
   public async destroy(

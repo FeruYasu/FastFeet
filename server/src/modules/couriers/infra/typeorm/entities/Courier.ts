@@ -6,6 +6,10 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import uploadConfig from '@config/upload';
+
+import { Expose } from 'class-transformer';
+
 @Entity('couriers')
 class Courier {
   @PrimaryColumn()
@@ -19,6 +23,20 @@ class Courier {
 
   @Column()
   avatar: string;
+
+  @Expose({ name: 'avatar_url' })
+  getAvatarUrl(): string | null {
+    if (!this.avatar) {
+      return null;
+    }
+
+    switch (uploadConfig.driver) {
+      case 'disk':
+        return `${process.env.APP_API_URL}/files/${this.avatar}`;
+      default:
+        return null;
+    }
+  }
 
   @CreateDateColumn()
   created_at: Date;

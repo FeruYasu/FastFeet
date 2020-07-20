@@ -8,6 +8,8 @@ import DeleteDeliveryService from '@modules/deliveries/services/DeleteDeliverySe
 import UpdateDeliveryService from '@modules/deliveries/services/UpdateDeliveryService';
 import FilterDeliveriesService from '@modules/deliveries/services/FilterDeliveriesService';
 
+import { classToClass } from 'class-transformer';
+
 export default class DeliveriesController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { recipient_id, courier_id, product } = request.body;
@@ -38,7 +40,7 @@ export default class DeliveriesController {
       deliveries = await filterDelivery.execute(product);
     }
 
-    return response.json(deliveries);
+    return response.json(classToClass(deliveries));
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
@@ -47,7 +49,7 @@ export default class DeliveriesController {
 
     const deliveries = await listDeliveries.execute(Number(id));
 
-    return response.json(deliveries);
+    return response.json(classToClass(deliveries));
   }
 
   public async destroy(
