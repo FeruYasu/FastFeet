@@ -23,6 +23,7 @@ interface Delivery {
   courier: {
     name: string;
     email: string;
+    avatar_url?: string;
   };
   recipient: {
     name: string;
@@ -137,7 +138,7 @@ const DeliveriesDashboard: React.FC = () => {
                 onChange={(e) => {
                   handleFilter(e);
                 }}
-                placeholder="Buscar por encomendas"
+                placeholder="Buscar por nome do produto"
               />
             </div>
 
@@ -165,7 +166,14 @@ const DeliveriesDashboard: React.FC = () => {
                 <p>#{delivery.id}</p>
                 <p>{delivery.recipient.name}</p>
                 <Courier>
-                  <span>{delivery.courierInitials}</span>
+                  {delivery.courier.avatar_url ? (
+                    <img
+                      src={delivery.courier.avatar_url}
+                      alt={delivery.courier.name}
+                    />
+                  ) : (
+                    <span>{delivery.courierInitials}</span>
+                  )}
                   <p>{delivery.courier.name}</p>
                 </Courier>
                 <p>{delivery.recipient.city}</p>

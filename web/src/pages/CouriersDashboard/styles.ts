@@ -90,6 +90,13 @@ export const Courier = styled.div`
   justify-content: space-between;
   place-items: center;
 
+  img {
+    margin-right: 5px;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+  }
+
   span {
     margin-right: 5px;
     height: 35px;

@@ -60,6 +60,7 @@ export const ImgContainer = styled.div`
     height: 150px;
     border-radius: 75px;
   }
+
   div {
     width: 150px;
     height: 150px;
@@ -69,10 +70,24 @@ export const ImgContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    position: relative;
+
+    label {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 75px;
+    }
+
+    input {
+      display: none;
+    }
 
     p {
-      font-size: 66px;
-      color: #7d40e7;
+      font-size: 12px;
+      color: #b89ee6;
+      margin-top: 0;
     }
   }
 `;

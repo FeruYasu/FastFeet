@@ -73,7 +73,7 @@ export const ActionsContainer = styled.div`
   margin: 20px 0;
 
   input {
-    width: 237px;
+    width: 300px;
     height: 36px;
     background: #ffffff 0% 0% no-repeat padding-box;
     border: 1px solid #dddddd;
@@ -123,6 +123,13 @@ export const Courier = styled.div`
   display: flex;
   justify-content: space-between;
   place-items: center;
+
+  img {
+    margin-right: 5px;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+  }
 
   span {
     margin-right: 5px;

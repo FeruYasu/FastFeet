@@ -21,6 +21,7 @@ interface Courier {
   email: string;
   status: string;
   courierInitials: string;
+  avatar_url?: string;
   start_date?: Date;
   end_date?: Date;
 }
@@ -120,7 +121,11 @@ const CouriersDashboard: React.FC = () => {
               <li key={courier.id}>
                 <p>#{courier.id}</p>
                 <Courier>
-                  <span>{courier.courierInitials}</span>
+                  {courier.avatar_url ? (
+                    <img src={courier.avatar_url} alt={courier.name} />
+                  ) : (
+                    <span>{courier.courierInitials}</span>
+                  )}
                 </Courier>
 
                 <p>{courier.name}</p>

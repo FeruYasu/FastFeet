@@ -1,5 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { MdKeyboardArrowLeft, MdDone } from 'react-icons/md';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  ChangeEvent,
+} from 'react';
+import { MdKeyboardArrowLeft, MdDone, MdPermIdentity } from 'react-icons/md';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { Link, useParams, useHistory } from 'react-router-dom';
@@ -18,9 +24,16 @@ import {
   BoxContainer,
 } from './styles';
 
+interface Courier {
+  id: number;
+  name: string;
+  email: string;
+  avatar_url: string;
+}
+
 const HandleCouriers: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const [photo, setPhoto] = useState(null);
+  const [courier, setCourier] = useState<Courier | null>(null);
   const [title, setTitle] = useState('Novo entregador');
 
   const history = useHistory();
@@ -29,7 +42,7 @@ const HandleCouriers: React.FC = () => {
 
   useEffect(() => {
     async function loadCourier(): Promise<void> {
-      const response = await api.get(`/couriers/${id}`);
+      const response = await api.get<Courier>(`/couriers/${id}`);
 
       if (formRef.current) {
         formRef.current.setData({
@@ -37,6 +50,8 @@ const HandleCouriers: React.FC = () => {
           email: response.data.email,
         });
       }
+
+      setCourier(response.data);
     }
 
     if (id) {
@@ -57,6 +72,20 @@ const HandleCouriers: React.FC = () => {
       history.push('/couriers');
     }
   }, [history, id]);
+
+  const handleAvatarChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files) {
+        const data = new FormData();
+        data.append('avatar', e.target.files[0]);
+
+        api.patch(`/couriers/avatar/${id}`, data).then((response) => {
+          setCourier(response.data);
+        });
+      }
+    },
+    [id],
+  );
 
   return (
     <>
@@ -82,11 +111,30 @@ const HandleCouriers: React.FC = () => {
 
             <BoxContainer>
               <ImgContainer>
-                {photo ? (
-                  <img src="" alt="" />
+                {courier?.avatar_url ? (
+                  <div>
+                    <label htmlFor="avatar">
+                      <input
+                        type="file"
+                        id="avatar"
+                        onChange={handleAvatarChange}
+                      />
+                    </label>
+
+                    <img src={courier.avatar_url} alt={courier.name} />
+                  </div>
                 ) : (
                   <div>
-                    <p />
+                    <label htmlFor="avatar">
+                      <input
+                        type="file"
+                        id="avatar"
+                        onChange={handleAvatarChange}
+                      />
+                    </label>
+
+                    <MdPermIdentity color="#b89ee6" size={60} />
+                    <p>Adicionar imagem</p>
                   </div>
                 )}
               </ImgContainer>
