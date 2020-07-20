@@ -8,11 +8,13 @@ import DeliveriesDashboard from '../pages/DeliveriesDashboard';
 import HandleDelivery from '../pages/HandleDelivery';
 import CouriersDashboard from '../pages/CouriersDashboard';
 import HandleCouriers from '../pages/HandleCourier';
+import RecipientDashboard from '../pages/RecipientsDashboard';
 
 const Routes: React.FC = () => {
   return (
     <Switch>
       <Route path="/" exact component={SignIn} />
+
       <Route
         path="/deliveries"
         component={DeliveriesDashboard}
@@ -26,6 +28,7 @@ const Routes: React.FC = () => {
         exact
       />
       <Route path="/deliveries/new" component={HandleDelivery} isPrivate />
+
       <Route path="/couriers" component={CouriersDashboard} isPrivate exact />
       <Route
         path="/couriers/edit/:id"
@@ -34,6 +37,13 @@ const Routes: React.FC = () => {
         exact
       />
       <Route path="/couriers/new" component={HandleCouriers} isPrivate />
+
+      <Route
+        path="/recipients"
+        component={RecipientDashboard}
+        isPrivate
+        exact
+      />
     </Switch>
   );
 };
