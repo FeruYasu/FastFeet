@@ -1,40 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { darken, lighten } from 'polished';
 import { MdSearch } from 'react-icons/md';
-
-const color = {
-  Entregue: css`
-    color: #2ca42b;
-    background: #dff0df;
-  `,
-  Cancelado: css`
-    color: #de3b3b;
-    background: #fab0b0;
-  `,
-  Retirado: css`
-    color: #4d85ee;
-    background: #bad2ff;
-  `,
-  Pendente: css`
-    color: #c1bc35;
-    background: #f0f0df;
-  `,
-};
-
-const background = {
-  Entregue: css`
-    background-color: #2ca42b;
-  `,
-  Cancelado: css`
-    background-color: #de3b3b;
-  `,
-  Retirado: css`
-    background-color: #4d85ee;
-  `,
-  Pendente: css`
-    background-color: #c1bc35;
-  `,
-};
 
 export const Container = styled.div`
   background: #f5f5f5;
@@ -56,8 +22,8 @@ export const Content = styled.div`
 
   ul {
     display: grid;
-    grid-template-columns: 50px 1fr 1fr 1fr 1fr 1fr 50px;
-    place-items: center;
+    grid-template-columns: 50px 1fr 50px;
+    place-items: left;
     padding: 10px 20px;
 
     li {
@@ -73,7 +39,7 @@ export const ActionsContainer = styled.div`
   margin: 20px 0;
 
   input {
-    width: 300px;
+    width: 237px;
     height: 36px;
     background: #ffffff 0% 0% no-repeat padding-box;
     border: 1px solid #dddddd;
@@ -121,15 +87,8 @@ export const IconSearch = styled(MdSearch)`
 
 export const Courier = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   place-items: center;
-
-  img {
-    margin-right: 5px;
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-  }
 
   span {
     margin-right: 5px;
@@ -145,14 +104,14 @@ export const Courier = styled.div`
   }
 `;
 
-export const DeliveryList = styled.div`
+export const ProblemList = styled.div`
   width: 100%;
   margin-top: 10px;
 
   li {
     display: grid;
-    grid-template-columns: 50px 1fr 1fr 1fr 1fr 1fr 50px;
-    place-items: center;
+    grid-template-columns: 50px 1fr 50px;
+    place-items: left;
     padding: 10px 20px;
     background: #fff;
     border-radius: 4px;
@@ -173,25 +132,5 @@ export const DeliveryList = styled.div`
     color: #c6c6c6;
     padding: 0 5px;
     height: 36px;
-  }
-`;
-
-export const Status = styled.div`
-  display: flex;
-  place-items: center;
-  justify-content: space-evenly;
-  width: 99px;
-  height: 25px;
-  font-weight: 700;
-  font-size: 14px;
-  border-radius: 12px;
-  ${() => color.Entregue};
-
-  &::before {
-    content: '';
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    ${() => background.Entregue};
   }
 `;

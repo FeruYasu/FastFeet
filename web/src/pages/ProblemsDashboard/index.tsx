@@ -10,37 +10,30 @@ import {
   Container,
   Content,
   ActionsContainer,
-  RecipientList,
+  ProblemList,
   IconSearch,
 } from './styles';
 
-interface Recipient {
+interface Problem {
   id: number;
-  name: string;
-  street: string;
-  number: string;
-  city: string;
-  zipcode: string;
-  state: string;
+  description: string;
 }
 
-const RecipientDashboard: React.FC = () => {
-  const [recipients, setRecipients] = useState([]);
+const ProblemsDashboard: React.FC = () => {
+  const [problems, setProblems] = useState([]);
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(0);
 
   useEffect(() => {
-    async function loadRecipients(): Promise<void> {
-      const response = await api.get('/recipients', {
+    api
+      .get('/problems', {
         params: {
           name: query,
         },
+      })
+      .then((response) => {
+        setProblems(response.data);
       });
-
-      setRecipients(response.data);
-    }
-
-    loadRecipients();
   }, [query]);
 
   const handleVisible = useCallback(
@@ -60,15 +53,13 @@ const RecipientDashboard: React.FC = () => {
         const { status } = await api.delete(`recipients/${id}`);
 
         if (status === 204) {
-          setRecipients(
-            recipients.filter((recipient: Recipient) => recipient.id !== id),
-          );
+          setProblems(problems.filter((problem: Problem) => problem.id !== id));
         } else {
           // toast.error('Não possível remover a encomenda. Tente novamente');
         }
       }
     },
-    [recipients],
+    [problems],
   );
 
   const handleFilter = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +71,7 @@ const RecipientDashboard: React.FC = () => {
       <Header />
       <Container>
         <Content>
-          <h1>Gerenciando destinatários</h1>
+          <h1>Gerenciando problemas</h1>
           <ActionsContainer>
             <div>
               <IconSearch size={22} />
@@ -90,13 +81,13 @@ const RecipientDashboard: React.FC = () => {
                 onChange={(e) => {
                   handleFilter(e);
                 }}
-                placeholder="Buscar por destinatários"
+                placeholder="Buscar por problemas"
               />
             </div>
 
             <Link
               to={{
-                pathname: '/recipients/new',
+                pathname: '/problems/new',
               }}
             >
               <MdAdd size={26} color="#FFF" />
@@ -105,43 +96,36 @@ const RecipientDashboard: React.FC = () => {
           </ActionsContainer>
           <ul>
             <li>ID</li>
-            <li>Nome</li>
-            <li>Endereço</li>
+            <li>Descrição</li>
             <li>Ações</li>
           </ul>
-          <RecipientList>
-            {recipients.map((recipient: Recipient) => (
-              <li key={recipient.id}>
-                <p>#{recipient.id}</p>
-                <p>{recipient.name}</p>
-                <p>
-                  {recipient.street}
-                  {recipient.number}, {recipient.city} - {recipient.state},
-                  {recipient.zipcode}
-                </p>
-
+          <ProblemList>
+            {problems.map((problem: Problem) => (
+              <li key={problem.id}>
+                <p>#{problem.id}</p>
+                <p>{problem.description}</p>
                 <div>
                   <MdMoreHoriz
                     size={26}
-                    onClick={() => handleVisible(recipient.id)}
+                    onClick={() => handleVisible(problem.id)}
                   />
-                  {open === recipient.id && (
+                  {open === problem.id && (
                     <Actions
-                      id={recipient.id}
-                      handleDelete={() => handleDelete(recipient.id)}
+                      id={problem.id}
+                      handleDelete={() => handleDelete(problem.id)}
                       edit
-                      path="/recipients/edit"
+                      path="/problems/edit"
                       exclude
                     />
                   )}
                 </div>
               </li>
             ))}
-          </RecipientList>
+          </ProblemList>
         </Content>
       </Container>
     </>
   );
 };
 
-export default RecipientDashboard;
+export default ProblemsDashboard;

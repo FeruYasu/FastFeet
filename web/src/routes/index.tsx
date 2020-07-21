@@ -9,6 +9,7 @@ import HandleDelivery from '../pages/HandleDelivery';
 import CouriersDashboard from '../pages/CouriersDashboard';
 import HandleCouriers from '../pages/HandleCourier';
 import RecipientDashboard from '../pages/RecipientsDashboard';
+import ProblemsDashboard from '../pages/ProblemsDashboard';
 
 const Routes: React.FC = () => {
   return (
@@ -44,6 +45,8 @@ const Routes: React.FC = () => {
         isPrivate
         exact
       />
+
+      <Route path="/problems" component={ProblemsDashboard} isPrivate exact />
     </Switch>
   );
 };
