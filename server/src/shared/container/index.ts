@@ -15,6 +15,9 @@ import CouriersRepository from '@modules/couriers/infra/typeorm/repositories/Cou
 import IDeliveriesRepository from '@modules/deliveries/repositories/IDeliveriesRepository';
 import DeliveriesRepository from '@modules/deliveries/infra/typeorm/repositories/DeliveriesRepository';
 
+import IDeliveryProblemsRepository from '@modules/delivery_problems/repositories/IDeliveryProblemsRepository';
+import DeliveryProblemsRepository from '@modules/delivery_problems/infra/typeorm/repositories/DeliveryProblemsRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -33,4 +36,9 @@ container.registerSingleton<ICouriersRepository>(
 container.registerSingleton<IDeliveriesRepository>(
   'DeliveriesRepository',
   DeliveriesRepository,
+);
+
+container.registerSingleton<IDeliveryProblemsRepository>(
+  'DeliveryProblemsRepository',
+  DeliveryProblemsRepository,
 );

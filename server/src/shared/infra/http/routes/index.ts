@@ -5,6 +5,7 @@ import usersRouter from '@modules/users/infra/http/routes/users.routes';
 import recipientsRouter from '@modules/recipients/infra/http/routes/recipients.routes';
 import sessionsRouter from '@modules/users/infra/http/routes/sessions.routes';
 import couriersRouter from '@modules/couriers/infra/http/routes/couriers.routes';
+import deliveryProblemsRouter from '@modules/delivery_problems/infra/http/routes/deliveryProblems.routes';
 
 const routes = Router();
 
@@ -13,5 +14,6 @@ routes.use('/sessions', sessionsRouter);
 routes.use('/deliveries', deliveriesRouter);
 routes.use('/recipients', recipientsRouter);
 routes.use('/couriers', couriersRouter);
+routes.use('/deliveryproblems', deliveryProblemsRouter);
 
 export default routes;
