@@ -44,6 +44,10 @@ class RecipientsRepository implements IRecipientsRepository {
 
     return recipient;
   }
+
+  public async deleteById(id: number): Promise<void> {
+    await this.ormRepository.delete({ id });
+  }
 }
 
 export default RecipientsRepository;

@@ -8,4 +8,5 @@ export default interface IRecipientsRepository {
   create(data: ICreateRecipientDTO): Promise<Recipient>;
   save(recipient: Recipient): Promise<Recipient>;
   filterByName(name: string): Promise<Recipient[] | undefined>;
+  deleteById(id: number): Promise<void>;
 }

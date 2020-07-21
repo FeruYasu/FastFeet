@@ -5,6 +5,8 @@ import CreateRecipientService from '@modules/recipients/services/CreateRecipient
 import ListRecipientsService from '@modules/recipients/services/ListRecipientsService';
 import UpdateRecipientService from '@modules/recipients/services/UpdateRecipientService';
 import FilterRecipientsByName from '@modules/recipients/services/FilterRecipientByNameService';
+import DeleteRecipientService from '@modules/recipients/services/DeleteRecipientService';
+
 import { classToClass } from 'class-transformer';
 
 export default class RecipientsController {
@@ -78,5 +80,18 @@ export default class RecipientsController {
     });
 
     return response.json(recipient);
+  }
+
+  public async destroy(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { id } = request.params;
+
+    const deleteRecipient = container.resolve(DeleteRecipientService);
+
+    await deleteRecipient.execute(Number(id));
+
+    return response.status(204).json({ message: 'deleted' });
   }
 }

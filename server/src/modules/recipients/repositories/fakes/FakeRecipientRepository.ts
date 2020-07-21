@@ -47,6 +47,14 @@ class FakeRecipientRepository implements IRecipientsRepository {
 
     return filtered;
   }
+
+  public async deleteById(id: number): Promise<void> {
+    const newArray = this.recipients.filter(
+      findRecipient => findRecipient.id !== id,
+    );
+
+    this.recipients = newArray;
+  }
 }
 
 export default FakeRecipientRepository;

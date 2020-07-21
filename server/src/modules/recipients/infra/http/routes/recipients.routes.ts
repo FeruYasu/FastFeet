@@ -28,6 +28,8 @@ recipientsRouter.post(
 
 recipientsRouter.get('/', recipientsController.index);
 
+recipientsRouter.delete('/:id', recipientsController.destroy);
+
 recipientsRouter.put(
   '/:id',
   celebrate({
