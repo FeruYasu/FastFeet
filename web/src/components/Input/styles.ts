@@ -29,8 +29,8 @@ export const Container = styled.div<ContainerProps>`
   ${(props) =>
     props.isFocused &&
     css`
-      border-color: #7d40e7;
-      color: #7d40e7;
+      border-color: ${props.theme.colors.primary};
+      color: ${props.theme.colors.primary};
     `}
 
   ${(props) =>
@@ -52,7 +52,7 @@ export const Container = styled.div<ContainerProps>`
       ${(props) =>
         props.isFocused &&
         css`
-          border-color: #7d40e7;
+          border-color: ${props.theme.colors.primary};
         `}
 
       &::placeholder {

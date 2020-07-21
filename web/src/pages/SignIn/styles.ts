@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  background: #7d40e7;
+  background: ${(props) => props.theme.colors.primary};
   display: flex;
   flex-direction: row;
   height: 100vh;
@@ -41,40 +41,22 @@ export const Content = styled.div`
     flex-direction: column;
     margin-top: 30px;
     place-items: center;
-
-    span {
-      color: #fb6f91;
-      align-self: flex-start;
-      margin: 0 0 10px;
-      font-weight: bold;
-    }
-
-    a {
-      color: #fff;
-      margin-top: 15px;
-      font-size: 16px;
-      opacity: 0.8;
-
-      &:hover {
-        opacity: 1;
-      }
-    }
   }
 
   button {
     margin: 5px 0 0;
     height: 44px;
     width: 72%;
-    background: #7d40e7;
+    background: ${(props) => props.theme.colors.accent};
     font-weight: bold;
-    color: #fff;
+    color: ${(props) => props.theme.colors.primary};
     border: 0;
     border-radius: 4px;
     font-size: 16px;
     transition: background 0.2s;
 
     &:hover {
-      background: ${darken(0.04, '#7d40e7')};
+      background: ${(props) => darken(0.04, props.theme.colors.accent)};
     }
   }
 `;

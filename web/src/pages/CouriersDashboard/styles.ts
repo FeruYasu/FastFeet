@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
+import { darken, lighten } from 'polished';
 import { MdSearch } from 'react-icons/md';
 
 export const Container = styled.div`
@@ -52,8 +52,8 @@ export const ActionsContainer = styled.div`
     }
 
     &:focus {
-      border: 1px solid #7d40e7;
-      box-shadow: 0 0 4px 0 #7d40e7;
+      border: 1px solid ${(props) => props.theme.colors.primary};
+      box-shadow: 0 0 4px 0 ${(props) => props.theme.colors.primary};
     }
   }
 
@@ -61,7 +61,7 @@ export const ActionsContainer = styled.div`
     display: flex;
     place-items: center;
     justify-content: space-evenly;
-    background: #7d40e7;
+    background: ${(props) => props.theme.colors.primary};
     border: none;
     border-radius: 4px;
     color: #fff;
@@ -72,7 +72,7 @@ export const ActionsContainer = styled.div`
     height: 36px;
 
     &:hover {
-      background: ${darken(0.04, '#7d40e7')};
+      background: ${(props) => darken(0.04, props.theme.colors.primary)};
     }
   }
 `;
@@ -102,12 +102,12 @@ export const Courier = styled.div`
     height: 35px;
     width: 35px;
     border-radius: 50%;
-    background: #f4effc;
+    background: ${(props) => lighten(0.46, props.theme.colors.primary)};
     display: flex;
     place-items: center;
     justify-content: center;
     font-size: 16px;
-    color: ${darken(0.2, '#a28fd0')};
+    color: ${(props) => lighten(0.04, props.theme.colors.primary)};
   }
 `;
 

@@ -33,7 +33,7 @@ export const Content = styled.div`
       font-weight: 700;
 
       &:not(.main-nav-active):hover {
-        color: #7d40e7;
+        color: ${(props) => props.theme.colors.primary};
       }
     }
   }
