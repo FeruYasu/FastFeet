@@ -22,7 +22,7 @@ class UpdateRecipientService {
   ) {}
 
   public async execute(
-    id: string,
+    id: number,
     { name, addinfos, city, zipcode, street, state, number }: Request,
   ): Promise<Recipient> {
     const recipient = await this.recipientsRepository.findById(id);

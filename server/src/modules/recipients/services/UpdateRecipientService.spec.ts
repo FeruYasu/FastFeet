@@ -44,7 +44,7 @@ describe('UpdateRecipient', () => {
 
   it('should not be able to update nonexistent recipient', async () => {
     await expect(
-      updateRecipient.execute('nonexisntedId', {
+      updateRecipient.execute(816, {
         number: 1111,
         state: 'PR',
         city: 'Curitiba',

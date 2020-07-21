@@ -51,7 +51,7 @@ export default class CouriersController {
     } else {
       const filterCourierByName = container.resolve(FilterCourierByNameService);
 
-      couriers = await filterCourierByName.execute(name);
+      couriers = await filterCourierByName.execute(name.toString());
     }
 
     return response.json(classToClass(couriers));

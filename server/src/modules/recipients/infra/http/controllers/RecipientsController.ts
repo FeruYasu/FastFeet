@@ -4,14 +4,26 @@ import { container } from 'tsyringe';
 import CreateRecipientService from '@modules/recipients/services/CreateRecipientService';
 import ListRecipientsService from '@modules/recipients/services/ListRecipientsService';
 import UpdateRecipientService from '@modules/recipients/services/UpdateRecipientService';
+import FilterRecipientsByName from '@modules/recipients/services/FilterRecipientByNameService';
+import { classToClass } from 'class-transformer';
 
 export default class RecipientsController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const listRecipients = container.resolve(ListRecipientsService);
+    const { name } = request.query;
 
-    const recipients = await listRecipients.execute();
+    let recipients;
 
-    return response.json(recipients);
+    if (!name) {
+      const listRecipientsService = container.resolve(ListRecipientsService);
+
+      recipients = await listRecipientsService.execute();
+    } else {
+      const filterRecipientsByName = container.resolve(FilterRecipientsByName);
+
+      recipients = await filterRecipientsByName.execute(name.toString());
+    }
+
+    return response.json(classToClass(recipients));
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
@@ -55,7 +67,7 @@ export default class RecipientsController {
 
     const { id } = request.params;
 
-    const recipient = await updateRecipient.execute(id, {
+    const recipient = await updateRecipient.execute(Number(id), {
       name,
       street,
       number,

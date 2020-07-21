@@ -32,12 +32,20 @@ class FakeRecipientRepository implements IRecipientsRepository {
     return listRecipients;
   }
 
-  public async findById(id: string): Promise<Recipient | undefined> {
+  public async findById(id: number): Promise<Recipient | undefined> {
     const existentRecipient = this.recipients.find(
       recipient => recipient.id === id,
     );
 
     return existentRecipient;
+  }
+
+  public async filterByName(name: string): Promise<Recipient[] | undefined> {
+    const filtered = this.recipients.filter(findRecipient =>
+      findRecipient.name.includes(name),
+    );
+
+    return filtered;
   }
 }
 

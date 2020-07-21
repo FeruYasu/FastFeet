@@ -37,7 +37,7 @@ export default class DeliveriesController {
     } else {
       const filterDelivery = container.resolve(FilterDeliveriesService);
 
-      deliveries = await filterDelivery.execute(product);
+      deliveries = await filterDelivery.execute(product.toString());
     }
 
     return response.json(classToClass(deliveries));

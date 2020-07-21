@@ -1,5 +1,5 @@
 import IRecipientsRepository from '@modules/recipients/repositories/IRecipientsRepository';
-import { Repository, getRepository } from 'typeorm';
+import { Repository, getRepository, Like } from 'typeorm';
 import ICreateRecipientDTO from '@modules/recipients/dtos/ICreateRecipientDTO';
 
 import Recipient from '../entities/Recipient';
@@ -27,9 +27,19 @@ class RecipientsRepository implements IRecipientsRepository {
     return this.ormRepository.find();
   }
 
-  public async findById(id: string): Promise<Recipient | undefined> {
+  public async findById(id: number): Promise<Recipient | undefined> {
     const recipient = await this.ormRepository.findOne({
       where: { id },
+    });
+
+    return recipient;
+  }
+
+  public async filterByName(name: string): Promise<Recipient[] | undefined> {
+    const recipient = await this.ormRepository.find({
+      where: {
+        name: Like(`%${name}%`),
+      },
     });
 
     return recipient;
