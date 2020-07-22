@@ -10,9 +10,9 @@ interface ActionsProps extends RouteComponentProps {
   id: number;
   handleView?: (id: number) => void;
   handleDelete: (id: number) => void;
-  edit: boolean;
+  edit?: boolean;
   path: string;
-  exclude: boolean;
+  exclude: string;
   cancel?: boolean;
 }
 
@@ -56,7 +56,7 @@ const Actions: React.FC<ActionsProps> = ({
             <Action>
               <button type="button" onClick={() => handleDelete(id)}>
                 <MdDeleteForever size={16} color="#DE3B3B" />
-                <p>Excluir</p>
+                <p>{exclude}</p>
               </button>
             </Action>
           )}

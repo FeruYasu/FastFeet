@@ -192,7 +192,7 @@ const DeliveriesDashboard: React.FC = () => {
                       handleDelete={() => handleDelete(delivery.id)}
                       path="/deliveries/edit"
                       edit
-                      exclude
+                      exclude="Excluir"
                     />
                   )}
                 </div>

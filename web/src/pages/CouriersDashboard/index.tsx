@@ -142,7 +142,7 @@ const CouriersDashboard: React.FC = () => {
                       handleDelete={() => handleDelete(courier.id)}
                       edit
                       path="/couriers/edit"
-                      exclude
+                      exclude="Excluir"
                     />
                   )}
                 </div>

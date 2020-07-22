@@ -131,7 +131,7 @@ const RecipientDashboard: React.FC = () => {
                       handleDelete={() => handleDelete(recipient.id)}
                       edit
                       path="/recipients/edit"
-                      exclude
+                      exclude="Excluir"
                     />
                   )}
                 </div>

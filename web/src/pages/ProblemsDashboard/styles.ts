@@ -22,7 +22,7 @@ export const Content = styled.div`
 
   ul {
     display: grid;
-    grid-template-columns: 50px 1fr 50px;
+    grid-template-columns: 150px 1fr 50px;
     place-items: left;
     padding: 10px 20px;
 
@@ -30,49 +30,9 @@ export const Content = styled.div`
       font-size: 16px;
       font-weight: bold;
     }
-  }
-`;
 
-export const ActionsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 0;
-
-  input {
-    width: 237px;
-    height: 36px;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border: 1px solid #dddddd;
-    border-radius: 4px;
-    position: relative;
-    padding-left: 35px;
-
-    ::placeholder {
-      color: #999999;
-    }
-
-    &:focus {
-      border: 1px solid ${(props) => props.theme.colors.primary};
-      box-shadow: 0 0 4px 0 ${(props) => props.theme.colors.primary};
-    }
-  }
-
-  a {
-    display: flex;
-    place-items: center;
-    justify-content: space-evenly;
-    background: ${(props) => props.theme.colors.primary};
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    font-weight: 700;
-    font-size: 14px;
-    padding: 0 5px;
-    width: 142px;
-    height: 36px;
-
-    &:hover {
-      background: ${(props) => darken(0.04, props.theme.colors.primary)};
+    li:first-child {
+      justify-self: center;
     }
   }
 `;
@@ -110,13 +70,17 @@ export const ProblemList = styled.div`
 
   li {
     display: grid;
-    grid-template-columns: 50px 1fr 50px;
+    grid-template-columns: 150px 1fr 50px;
     place-items: left;
     padding: 10px 20px;
     background: #fff;
     border-radius: 4px;
     margin-bottom: 20px;
     height: 57px;
+
+    p:first-child {
+      justify-self: center;
+    }
   }
 
   p {

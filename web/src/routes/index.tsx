@@ -10,6 +10,7 @@ import CouriersDashboard from '../pages/CouriersDashboard';
 import HandleCouriers from '../pages/HandleCourier';
 import RecipientDashboard from '../pages/RecipientsDashboard';
 import ProblemsDashboard from '../pages/ProblemsDashboard';
+import HandleRecipient from '../pages/HandleRecipient';
 
 const Routes: React.FC = () => {
   return (
@@ -45,6 +46,14 @@ const Routes: React.FC = () => {
         isPrivate
         exact
       />
+
+      <Route
+        path="/recipients/edit/:id"
+        component={HandleRecipient}
+        isPrivate
+      />
+
+      <Route path="/recipients/new" component={HandleRecipient} isPrivate />
 
       <Route path="/problems" component={ProblemsDashboard} isPrivate exact />
     </Switch>

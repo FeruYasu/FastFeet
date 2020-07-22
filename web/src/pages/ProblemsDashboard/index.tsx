@@ -1,40 +1,29 @@
-import React, { useState, useEffect, useCallback, ChangeEvent } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
-import { Link } from 'react-router-dom';
-import { MdAdd, MdMoreHoriz } from 'react-icons/md';
+import { MdMoreHoriz } from 'react-icons/md';
 import api from '../../services/api';
 import Header from '../../components/Header';
 import Actions from '../../components/Actions';
+import ModalProblem from '../../components/ModalProblem';
 
-import {
-  Container,
-  Content,
-  ActionsContainer,
-  ProblemList,
-  IconSearch,
-} from './styles';
+import { Container, Content, ProblemList } from './styles';
 
 interface Problem {
   id: number;
+  delivery_id: number;
   description: string;
 }
 
 const ProblemsDashboard: React.FC = () => {
   const [problems, setProblems] = useState([]);
-  const [query, setQuery] = useState('');
   const [open, setOpen] = useState(0);
+  const [modalopen, setModalOpen] = useState(0);
 
   useEffect(() => {
-    api
-      .get('/problems', {
-        params: {
-          name: query,
-        },
-      })
-      .then((response) => {
-        setProblems(response.data);
-      });
-  }, [query]);
+    api.get('/deliveryproblems').then((response) => {
+      setProblems(response.data);
+    });
+  }, []);
 
   const handleVisible = useCallback(
     (id: number) => {
@@ -45,6 +34,18 @@ const ProblemsDashboard: React.FC = () => {
       setOpen(actionOpen);
     },
     [open],
+  );
+
+  const handleView = useCallback(
+    (id: number) => {
+      let modal = id;
+      if (modalopen === id) {
+        modal = 0;
+      }
+      setModalOpen(modal);
+      setOpen(0);
+    },
+    [modalopen],
   );
 
   const handleDelete = useCallback(
@@ -62,47 +63,22 @@ const ProblemsDashboard: React.FC = () => {
     [problems],
   );
 
-  const handleFilter = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-  }, []);
-
   return (
     <>
       <Header />
       <Container>
         <Content>
           <h1>Gerenciando problemas</h1>
-          <ActionsContainer>
-            <div>
-              <IconSearch size={22} />
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => {
-                  handleFilter(e);
-                }}
-                placeholder="Buscar por problemas"
-              />
-            </div>
 
-            <Link
-              to={{
-                pathname: '/problems/new',
-              }}
-            >
-              <MdAdd size={26} color="#FFF" />
-              CADASTRAR
-            </Link>
-          </ActionsContainer>
           <ul>
-            <li>ID</li>
+            <li>Encomenda</li>
             <li>Descrição</li>
             <li>Ações</li>
           </ul>
           <ProblemList>
             {problems.map((problem: Problem) => (
               <li key={problem.id}>
-                <p>#{problem.id}</p>
+                <p>#{problem.delivery_id}</p>
                 <p>{problem.description}</p>
                 <div>
                   <MdMoreHoriz
@@ -113,12 +89,18 @@ const ProblemsDashboard: React.FC = () => {
                     <Actions
                       id={problem.id}
                       handleDelete={() => handleDelete(problem.id)}
-                      edit
+                      handleView={() => handleView(problem.id)}
                       path="/problems/edit"
-                      exclude
+                      exclude="Cancelar"
                     />
                   )}
                 </div>
+                {modalopen === problem.id && (
+                  <ModalProblem
+                    description={problem.description}
+                    handleView={() => handleView(0)}
+                  />
+                )}
               </li>
             ))}
           </ProblemList>
