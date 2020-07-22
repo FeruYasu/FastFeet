@@ -2,6 +2,10 @@ import styled, { css } from 'styled-components';
 import { darken, lighten } from 'polished';
 import { MdSearch } from 'react-icons/md';
 
+interface ColorProps {
+  color: 'Entregue' | 'Cancelado' | 'Retirado' | 'Pendente';
+}
+
 const color = {
   Entregue: css`
     color: #2ca42b;
@@ -176,7 +180,7 @@ export const DeliveryList = styled.div`
   }
 `;
 
-export const Status = styled.div`
+export const Status = styled.div<ColorProps>`
   display: flex;
   place-items: center;
   justify-content: space-evenly;
@@ -185,13 +189,14 @@ export const Status = styled.div`
   font-weight: 700;
   font-size: 14px;
   border-radius: 12px;
-  ${() => color.Entregue};
+
+  ${(props) => color[props.color || 'Pendente']};
 
   &::before {
     content: '';
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    ${() => background.Entregue};
+    ${(props) => background[props.color || 'Pendente']};
   }
 `;

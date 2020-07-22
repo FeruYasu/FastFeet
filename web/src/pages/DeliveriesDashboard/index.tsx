@@ -33,7 +33,7 @@ interface Delivery {
     zipcode: string;
     state: string;
   };
-  status: string;
+  status: 'Entregue' | 'Cancelado' | 'Retirado' | 'Pendente';
   courierInitials: string;
   start_date?: Date;
   end_date?: Date;

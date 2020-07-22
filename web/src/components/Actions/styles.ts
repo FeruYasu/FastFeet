@@ -6,13 +6,13 @@ export const Container = styled.div`
 
 export const ActionsPanel = styled.div`
   position: absolute;
-  width: 150px;
   box-shadow: 0px 0px 2px #00000026;
   background: #fff;
   left: calc(50% - 75px);
-  top: 20px;
+  top: 5px;
   border-radius: 8px;
   z-index: 1;
+  padding: 0 10px;
 
   &::before {
     content: '';
@@ -28,8 +28,9 @@ export const ActionsPanel = styled.div`
 `;
 
 export const ActionList = styled.div`
+  width: 100%;
+  min-width: 150px;
   hr {
-    margin: 0 10px;
     color: #eeeeee;
     background-color: #eeeeee;
     height: 1px;
@@ -37,8 +38,6 @@ export const ActionList = styled.div`
   }
 
   a {
-    display: flex;
-    width: 130px;
     display: flex;
     justify-content: left;
     height: 36px;
@@ -55,16 +54,22 @@ export const ActionList = styled.div`
 
 export const Action = styled.div`
   display: flex;
-  width: 130px;
-  display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 5px 0;
 
   button {
+    svg {
+      height: 16px;
+      width: 16px;
+    }
+
     p {
       color: #999999;
       font-size: 16px;
       margin-left: 10px;
+      text-align: left;
+      width: 80%;
     }
   }
 `;

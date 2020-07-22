@@ -50,8 +50,8 @@ const ProblemsDashboard: React.FC = () => {
 
   const handleDelete = useCallback(
     async (id: number) => {
-      if (window.confirm('Deseja excluir?')) {
-        const { status } = await api.delete(`recipients/${id}`);
+      if (window.confirm('Deseja cancelar a encomenda?')) {
+        const { status } = await api.post(`deliveries/cancel/${id}`);
 
         if (status === 204) {
           setProblems(problems.filter((problem: Problem) => problem.id !== id));
@@ -88,10 +88,10 @@ const ProblemsDashboard: React.FC = () => {
                   {open === problem.id && (
                     <Actions
                       id={problem.id}
-                      handleDelete={() => handleDelete(problem.id)}
+                      handleDelete={() => handleDelete(problem.delivery_id)}
                       handleView={() => handleView(problem.id)}
                       path="/problems/edit"
-                      exclude="Cancelar"
+                      exclude="Cancelar encomenda"
                     />
                   )}
                 </div>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { darken, lighten } from 'polished';
+import { lighten } from 'polished';
 import { MdSearch } from 'react-icons/md';
 
 export const Container = styled.div`
@@ -77,9 +77,10 @@ export const ProblemList = styled.div`
     border-radius: 4px;
     margin-bottom: 20px;
     height: 57px;
+    place-items: center;
 
-    p:first-child {
-      justify-self: center;
+    p:nth-child(2) {
+      justify-self: flex-start;
     }
   }
 
