@@ -75,6 +75,22 @@ class DeliveriesRepository implements IDeliveriesRepository {
 
     return deliveries;
   }
+
+  public async cancelById(id: number): Promise<Delivery | undefined> {
+    const delivery = await this.ormRepository.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (delivery) {
+      delivery.canceled_at = new Date();
+
+      await this.ormRepository.save(delivery);
+    }
+
+    return delivery;
+  }
 }
 
 export default DeliveriesRepository;

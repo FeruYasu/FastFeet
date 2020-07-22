@@ -5,6 +5,7 @@ export default interface IDeliveriesRepository {
   create(data: ICreateDeliveryDTO): Promise<Delivery>;
   save(data: Delivery): Promise<Delivery>;
   deleteById(id: number): Promise<void>;
+  cancelById(id: number): Promise<Delivery | undefined>;
   updateById(
     id: number,
     data: ICreateDeliveryDTO,

@@ -69,6 +69,16 @@ class FakeDeliveriesRepository implements IDeliveriesRepository {
 
     return filtered;
   }
+
+  public async cancelById(id: number): Promise<Delivery | undefined> {
+    const findIndex = this.deliveries.findIndex(
+      findDelivery => findDelivery.id === id,
+    );
+
+    this.deliveries[findIndex].canceled_at = new Date();
+
+    return this.deliveries[findIndex];
+  }
 }
 
 export default FakeDeliveriesRepository;
