@@ -16,7 +16,7 @@ class DeliveryProblems {
 
   @ManyToOne(() => Delivery)
   @JoinColumn({ name: 'delivery_id', referencedColumnName: 'id' })
-  delivery_id: Delivery;
+  delivery_id: number;
 
   @Column()
   description: string;

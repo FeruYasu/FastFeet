@@ -9,5 +9,6 @@ const deliveryProblemsRouter = Router();
 
 deliveryProblemsRouter.use(ensureAuthentication);
 deliveryProblemsRouter.post('/', deliveryProblemsController.create);
+deliveryProblemsRouter.get('/', deliveryProblemsController.index);
 
 export default deliveryProblemsRouter;

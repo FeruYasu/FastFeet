@@ -14,9 +14,8 @@ class DeliveryProblemsRepository implements IDeliveryProblemsRepository {
   public async create(
     data: ICreateDeliveryProblemDTO,
   ): Promise<DeliveryProblems> {
-    console.log(data);
     const deliveryProblem = this.ormRepository.create(data);
-    console.log(deliveryProblem);
+
     await this.ormRepository.save(deliveryProblem);
 
     return deliveryProblem;
@@ -26,6 +25,10 @@ class DeliveryProblemsRepository implements IDeliveryProblemsRepository {
     deliveryProblem: DeliveryProblems,
   ): Promise<DeliveryProblems> {
     return this.ormRepository.save(deliveryProblem);
+  }
+
+  public async listAll(): Promise<DeliveryProblems[]> {
+    return this.ormRepository.find();
   }
 }
 

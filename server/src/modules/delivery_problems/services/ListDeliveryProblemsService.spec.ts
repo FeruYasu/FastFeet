@@ -9,18 +9,20 @@ import CreateCourierService from '@modules/couriers/services/CreateCourierServic
 
 import FakeDeliveryProblemsRepository from '../repositories/fakes/FakeDeliveryProblemsRepository';
 import CreateDeliveryProblemsService from './CreateDeliveryProblemService';
+import ListDeliveryProblemsService from './ListDeliveryProblemsService';
 
 let createRecipientService: CreateRecipientService;
 let createCourierService: CreateCourierService;
 let createDeliveryService: CreateDeliveryService;
 let createDeliveryProblemService: CreateDeliveryProblemsService;
+let listDeliveryProblemsService: ListDeliveryProblemsService;
 
 let fakeDeliveriesRepository: FakeDeliveriesRepository;
 let fakeRecipientRepository: FakeRecipientsRepository;
 let fakeCourierRepository: FakeCouriersRepository;
 let fakeDeliveryProblemsRepository: FakeDeliveryProblemsRepository;
 
-describe('Create Delivery Problems', () => {
+describe('List Delivery Problems', () => {
   beforeEach(() => {
     fakeDeliveriesRepository = new FakeDeliveriesRepository();
     fakeRecipientRepository = new FakeRecipientsRepository();
@@ -36,9 +38,13 @@ describe('Create Delivery Problems', () => {
     createDeliveryProblemService = new CreateDeliveryProblemsService(
       fakeDeliveryProblemsRepository,
     );
+
+    listDeliveryProblemsService = new ListDeliveryProblemsService(
+      fakeDeliveryProblemsRepository,
+    );
   });
 
-  it('should be able to create a new delivery problem', async () => {
+  it('should be able to List all delivery problem', async () => {
     const recipient = await createRecipientService.execute({
       name: 'Joao Paulo',
       street: 'Rua sete de setembro',
@@ -59,11 +65,18 @@ describe('Create Delivery Problems', () => {
       courier_id: courier.id,
     });
 
-    const deliveryProblem = await createDeliveryProblemService.execute({
+    const deliveryProblem1 = await createDeliveryProblemService.execute({
       delivery_id: delivery.id,
       description: 'Problema na entrega',
     });
 
-    expect(deliveryProblem).toHaveProperty('id');
+    const deliveryProblem2 = await createDeliveryProblemService.execute({
+      delivery_id: delivery.id,
+      description: 'Problema na entrega 2',
+    });
+
+    const allProblems = await listDeliveryProblemsService.execute();
+
+    expect(allProblems).toEqual([deliveryProblem1, deliveryProblem2]);
   });
 });

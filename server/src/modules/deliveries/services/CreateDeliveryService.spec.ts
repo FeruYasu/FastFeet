@@ -22,7 +22,6 @@ describe('CreateDelivery', () => {
 
     createDelivery = new CreateDeliveryService(fakeDeliveriesRepository);
     createRecipient = new CreateRecipientService(fakeRecipientRepository);
-
     createCourier = new CreateCourierService(fakeCourierRepository);
   });
 
