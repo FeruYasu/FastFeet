@@ -14,9 +14,12 @@ class DeliveryProblems {
   @PrimaryColumn()
   id: number;
 
+  @Column()
+  delivery_id: number;
+
   @ManyToOne(() => Delivery)
   @JoinColumn({ name: 'delivery_id', referencedColumnName: 'id' })
-  delivery_id: number;
+  delivery: Delivery;
 
   @Column()
   description: string;

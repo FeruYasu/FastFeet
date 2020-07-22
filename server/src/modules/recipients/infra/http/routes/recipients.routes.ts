@@ -27,6 +27,7 @@ recipientsRouter.post(
 );
 
 recipientsRouter.get('/', recipientsController.index);
+recipientsRouter.get('/:id', recipientsController.show);
 
 recipientsRouter.delete('/:id', recipientsController.destroy);
 

@@ -28,7 +28,7 @@ class DeliveryProblemsRepository implements IDeliveryProblemsRepository {
   }
 
   public async listAll(): Promise<DeliveryProblems[]> {
-    return this.ormRepository.find();
+    return this.ormRepository.find({ relations: ['delivery'] });
   }
 }
 
