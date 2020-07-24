@@ -38,6 +38,18 @@ class DeliveriesRepository implements IDeliveriesRepository {
     return delivery;
   }
 
+  public async listDeliveryFromCourierID(
+    courier_id: number,
+  ): Promise<Delivery[] | undefined> {
+    const deliveryList = await this.ormRepository.find({
+      where: {
+        courier_id,
+      },
+    });
+
+    return deliveryList;
+  }
+
   public async deleteById(id: number): Promise<void> {
     await this.ormRepository.delete(id);
   }

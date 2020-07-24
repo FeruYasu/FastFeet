@@ -12,5 +12,8 @@ export default interface IDeliveriesRepository {
   ): Promise<Delivery | undefined>;
   listAll(): Promise<Delivery[]>;
   listById(id: number): Promise<Delivery | undefined>;
+  listDeliveryFromCourierID(
+    courier_id: number,
+  ): Promise<Delivery[] | undefined>;
   filterByProduct(product: string): Promise<Delivery[] | undefined>;
 }

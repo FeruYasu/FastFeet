@@ -45,6 +45,16 @@ class FakeDeliveriesRepository implements IDeliveriesRepository {
     return this.deliveries[findIndex];
   }
 
+  public async listDeliveryFromCourierID(
+    courier_id: number,
+  ): Promise<Delivery[] | undefined> {
+    const deliveryList = this.deliveries.filter(
+      findDelivery => findDelivery.courier_id === courier_id,
+    );
+
+    return deliveryList;
+  }
+
   public async updateById(
     id: number,
     data: ICreateDeliveryDTO,
