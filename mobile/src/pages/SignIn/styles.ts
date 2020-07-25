@@ -62,12 +62,6 @@ export const ForgotPasswordText = styled.Text`
   font-family: 'RobotoSlab-Regular';
 `;
 
-export const Form = styled.View`
-  margin-top: 50px;
-  align-self: stretch;
-  padding: 0 30px;
-`;
-
 export const FormInput = styled.TextInput`
   padding: 0 15px;
   height: 46px;

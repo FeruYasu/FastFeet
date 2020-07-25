@@ -1,6 +1,4 @@
-import React from 'react';
-import { format, parseISO } from 'date-fns';
-import pt from 'date-fns/locale/pt';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -15,9 +13,6 @@ import {
   StatusLabel,
   Label,
   DetailsContainer,
-  ContentContainer,
-  DetailsLabel,
-  Content,
   DetailsButton,
   DetailsButtonText,
 } from './styles';
@@ -27,21 +22,24 @@ interface DeliveryData {
     start_date: string;
     end_date: string;
     product: string;
-    Recipient: {
+    recipient: {
       city: string;
     };
   };
 }
 
 const Delivery: React.FC<DeliveryData> = ({ data }) => {
-  let startDate = '--/--/--';
+  const [statusRetirado, setStatusRetirado] = useState(false);
+  const [statusEntregue, setStatusEntregue] = useState(false);
 
   const navigation = useNavigation();
 
   if (data.start_date) {
-    startDate = format(parseISO(data.start_date), "dd'/'MM'/'yyyy", {
-      locale: pt,
-    });
+    setStatusRetirado(true);
+  }
+
+  if (data.end_date) {
+    setStatusEntregue(true);
   }
 
   return (
@@ -52,32 +50,25 @@ const Delivery: React.FC<DeliveryData> = ({ data }) => {
       </TitleContainer>
       <StatusContainer>
         <CircleDone />
-        <Line />
-        {data.start_date ? <CircleDone /> : <CircleOpen />}
-        <Line />
-        {data.end_date ? <CircleDone /> : <CircleOpen />}
+        <Line color={statusRetirado} />
+        {statusRetirado ? <CircleDone /> : <CircleOpen />}
+        <Line color={statusEntregue} />
+        {statusEntregue ? <CircleDone /> : <CircleOpen />}
       </StatusContainer>
       <StatusLabel>
-        <Label>Aguardando Retirada</Label>
-        <Label>Retirada</Label>
-        <Label>Entregue</Label>
+        <Label color>AGUARDANDO</Label>
+        <Label color={statusRetirado}>RETIRADO</Label>
+        <Label color={statusEntregue}>ENTREGUE</Label>
       </StatusLabel>
       <DetailsContainer>
-        <ContentContainer>
-          <DetailsLabel>Data</DetailsLabel>
-          <Content>{startDate}</Content>
-        </ContentContainer>
-        <ContentContainer>
-          <DetailsLabel>Cidade</DetailsLabel>
-          <Content>{data.Recipient.city}</Content>
-        </ContentContainer>
         <DetailsButton
           onPress={() => {
             navigation.navigate('DeliveryDetails', { data });
           }}
         >
-          <DetailsButtonText>Ver detalhes</DetailsButtonText>
+          <DetailsButtonText>Detalhes</DetailsButtonText>
         </DetailsButton>
+        <Icon name="arrow-forward" size={26} color="#4a31cd" />
       </DetailsContainer>
     </Container>
   );

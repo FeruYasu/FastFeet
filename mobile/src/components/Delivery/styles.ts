@@ -1,10 +1,13 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
 
+interface Status {
+  color: boolean;
+}
+
 export const Container = styled.View`
-  border: #0000001a;
   border-radius: 4px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `;
 
 export const TitleContainer = styled.View`
@@ -14,83 +17,84 @@ export const TitleContainer = styled.View`
 `;
 
 export const Title = styled.Text`
-  color: #7d40e7;
+  color: ${(props) => props.theme.colors.productTitle};
   margin-left: 10px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 20px;
 `;
 
 export const StatusContainer = styled.View`
   flex-direction: row;
+  width: 100%;
   justify-content: space-between;
   margin-top: 10px;
-  padding: 0 50px;
+  padding: 0 20px;
   align-items: center;
 `;
 
 export const CircleDone = styled.View`
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #7d40e7;
+  width: 15px;
+  height: 15px;
+  border-radius: 7.5px;
+  background-color: ${(props) => props.theme.colors.progress};
 `;
 export const CircleOpen = styled.View`
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
-  border: solid 1px #7d40e7;
+  width: 15px;
+  height: 15px;
+  border-radius: 7.5px;
+  border: solid 1px ${(props) => props.theme.colors.progress};
   background-color: #fff;
 `;
 
-export const Line = styled.View`
-  width: 120px;
+export const Line = styled.View<Status>`
+  width: 142px;
   height: 2px;
-  border: solid 1px #7d40e7;
-  background-color: #fff;
+  border: solid 1px ${(props) => props.theme.colors.subtitle};
+
+  ${(props) =>
+    props.color &&
+    css`
+      border: solid 1px ${props.theme.colors.progress};
+    `}
 `;
 
 export const StatusLabel = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 5px;
-  padding: 0 18px;
+  margin: 10px;
+  padding: 0px;
+  padding-right: 0px;
+  padding-left: 10px;
   align-items: center;
 `;
 
-export const Label = styled.Text`
+export const Label = styled.Text<Status>`
   width: 80px;
   text-align: center;
-  color: #999999;
-  font-size: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: ${(props) => props.theme.colors.subtitle};
+
+  ${(props) =>
+    props.color &&
+    css`
+      color: ${props.theme.colors.progress};
+    `}
 `;
 
 export const DetailsContainer = styled.View`
-  background: #f8f9fd;
+  background: #fef3d5;
   flex-direction: row;
-  margin-top: 10px;
+  justify-content: space-between;
+  margin-top: 12px;
   align-items: flex-end;
-  padding: 20px 15px;
-`;
-
-export const ContentContainer = styled.View`
-  flex: 1;
-`;
-
-export const DetailsLabel = styled.Text`
-  color: #999999;
-  font-size: 8px;
-`;
-
-export const Content = styled.Text`
-  font-size: 12px;
-  font-weight: bold;
-  margin-top: 5px;
+  padding: 12px 15px;
 `;
 
 export const DetailsButton = styled(TouchableOpacity)``;
 
 export const DetailsButtonText = styled.Text`
-  color: #7d40e7;
+  color: ${(props) => props.theme.colors.primary};
   font-weight: bold;
-  font-size: 12px;
+  font-size: 18px;
 `;

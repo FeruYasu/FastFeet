@@ -9,24 +9,24 @@ import React, {
 import AsyncStorage from '@react-native-community/async-storage';
 import api from '../services/api';
 
-interface User {
+interface Courier {
   id: string;
   name: string;
   email: string;
+  avatar: string;
 }
 
 interface AuthState {
   token: string;
-  user: User;
+  courier: Courier;
 }
 
 interface SignInCredentials {
-  email: string;
-  password: string;
+  id: number;
 }
 
 interface AuthContextData {
-  user: User;
+  user: Courier;
   loading: boolean;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
@@ -67,26 +67,25 @@ const AuthProvider: React.FC = ({ children }) => {
     loadStorageData();
   }, []);
 
-  const signIn = useCallback(async ({ email, password }) => {
-    const response = await api.post('sessions', {
-      email,
-      password,
+  const signIn = useCallback(async ({ id }) => {
+    const response = await api.post('/couriersessions', {
+      id,
     });
 
-    const { token, user } = response.data;
+    const { token, courier } = response.data;
 
     await AsyncStorage.multiSet([
       ['@FastFeet:token', token],
-      ['@FastFeet:user', JSON.stringify(user)],
+      ['@FastFeet:user', JSON.stringify(courier)],
     ]);
 
     api.defaults.headers.authorization = `Bearer ${token}`;
 
-    setData({ token, user });
+    setData({ token, courier });
   }, []);
 
   const signOut = useCallback(async () => {
-    await AsyncStorage.multiRemove(['@FastFeet:token', '@FastFeet:user']);
+    await AsyncStorage.multiRemove(['@FastFeet:token', '@FastFeet:courier']);
 
     setData({} as AuthState);
   }, []);
@@ -94,7 +93,7 @@ const AuthProvider: React.FC = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        user: data.user,
+        user: data.courier,
         loading,
         signIn,
         signOut,

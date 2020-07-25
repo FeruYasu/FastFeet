@@ -4,11 +4,13 @@ export default {
   colors: {
     primary: '#4a31cd',
     accent: '#ffbd42',
+    title: '#fff',
+    progress: '#34c883',
+    productTitle: '#000',
+    subtitle: '#d1d1d1',
     background: '#f5f5f5',
     text: '#333',
-    calendar: '#28262e',
+
     inputBackground: '#fff',
-    card: '#dbdbdb',
-    cardtext: '#525252',
   },
 };

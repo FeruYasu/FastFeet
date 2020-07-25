@@ -1,7 +1,9 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Image, Alert } from 'react-native';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
+import { Form } from '@unform/mobile';
+import Input from '../../components/Input';
 
 import { useAuth } from '../../hooks/auth';
 
@@ -20,19 +22,15 @@ import {
   SmallText,
   ForgotPassword,
   ForgotPasswordText,
-  Form,
-  FormInput,
   SubmitButton,
 } from './styles';
 
 interface SignInFormData {
-  email: string;
-  password: string;
+  id: number;
 }
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const [courierId, setCourierId] = useState();
 
   const { signIn } = useAuth();
 
@@ -41,16 +39,12 @@ const SignIn: React.FC = () => {
       try {
         formRef.current?.setErrors({});
         const schema = Yup.object().shape({
-          email: Yup.string()
-            .required('E-mail obrigatório')
-            .email('Digite um e-mail válido'),
-          password: Yup.string().required('Senha obrigatória'),
+          id: Yup.number().required('Digite um ID'),
         });
 
         await schema.validate(data, { abortEarly: false });
         await signIn({
-          email: data.email,
-          password: data.password,
+          id: data.id,
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -86,11 +80,11 @@ const SignIn: React.FC = () => {
       </BackgroundImage>
 
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <FormInput
+        <Input
           keyboardType="numeric"
+          name="id"
+          icon="mail"
           placeholder="Informe seu ID de cadastro"
-          value={courierId}
-          onChangeText={setCourierId}
         />
 
         <ForgotPassword>

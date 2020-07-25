@@ -10,25 +10,24 @@ import Delivery from '../../components/Delivery';
 import {
   Container,
   Header,
+  Top,
   ProfileImage,
   Text,
+  Input,
   NameContainer,
-  Name,
   TitleContainer,
   Title,
-  ButtonsContainer,
-  PendingButton,
-  PendingButtonText,
-  DeliveredButton,
-  DeliveredButtonText,
+  CityContainer,
+  City,
   DeliveryList,
 } from './styles';
 
 const Dashboard: React.FC = () => {
   const navigation = useNavigation();
-  const { signOut } = useAuth();
+  const { user, signOut } = useAuth();
 
   const [deliveries, setDeliveries] = useState([]);
+  const [filter, setFilter] = useState();
 
   useEffect(() => {
     async function loadDeliveries(): Promise<void> {
@@ -54,6 +53,7 @@ const Dashboard: React.FC = () => {
 
   async function handleListDelivered(): Promise<void> {
     const { data } = await api.get(`/couriers/1/deliveries`);
+
     const newList = data.filter((delivery) => {
       if (delivery.end_date !== null) {
         return delivery;
@@ -71,32 +71,31 @@ const Dashboard: React.FC = () => {
   return (
     <Container>
       <Header>
-        <ProfileImage>GA</ProfileImage>
-        <NameContainer>
-          <Text>Bem vindo de volta,</Text>
-          <Name>courier.name</Name>
-        </NameContainer>
+        <Top>
+          <ProfileImage>GA</ProfileImage>
+          <NameContainer>
+            <Text>Bem vindo de volta,</Text>
+            <Text>{user.name}</Text>
+          </NameContainer>
 
-        <Icon
-          onPress={handleLogout}
-          name="exit-to-app"
-          size={30}
-          color="#E74040"
-        />
+          <Icon
+            onPress={handleLogout}
+            name="exit-to-app"
+            size={30}
+            color="#ffbd42"
+          />
+        </Top>
+
+        <TitleContainer>
+          <Title>Entregas</Title>
+          <CityContainer>
+            <Icon name="place" size={22} color="#ffbd42" />
+            <City>Rio do Sul</City>
+          </CityContainer>
+        </TitleContainer>
       </Header>
 
-      <TitleContainer>
-        <Title>Entregas</Title>
-
-        <ButtonsContainer>
-          <PendingButton onPress={handlelistPendent}>
-            <PendingButtonText>Pendentes</PendingButtonText>
-          </PendingButton>
-          <DeliveredButton onPress={handleListDelivered}>
-            <DeliveredButtonText>Entregues</DeliveredButtonText>
-          </DeliveredButton>
-        </ButtonsContainer>
-      </TitleContainer>
+      <Input value={filter} placeholder="Filtrar por bairro" />
 
       <DeliveryList
         data={deliveries}
