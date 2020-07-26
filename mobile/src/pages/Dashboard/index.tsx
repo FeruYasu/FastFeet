@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
+import { View } from 'react-native';
 import { useAuth } from '../../hooks/auth';
 
 import api from '../../services/api';
@@ -12,6 +13,7 @@ import {
   Header,
   Top,
   ProfileImage,
+  ProfileText,
   Text,
   Input,
   NameContainer,
@@ -20,12 +22,15 @@ import {
   CityContainer,
   City,
   DeliveryList,
+  ButtonsContainer,
+  Button,
+  ButtonText,
 } from './styles';
 
 const Dashboard: React.FC = () => {
   const navigation = useNavigation();
   const { user, signOut } = useAuth();
-
+  const [statusPendente, setStatusPendente] = useState(true);
   const [deliveries, setDeliveries] = useState([]);
   const [filter, setFilter] = useState();
 
@@ -72,7 +77,12 @@ const Dashboard: React.FC = () => {
     <Container>
       <Header>
         <Top>
-          <ProfileImage>GA</ProfileImage>
+          {user.avatar_url ? (
+            <ProfileImage source={{ uri: user.avatar_url }} />
+          ) : (
+            <ProfileText>user.name</ProfileText>
+          )}
+
           <NameContainer>
             <Text>Bem vindo de volta,</Text>
             <Text>{user.name}</Text>
@@ -103,6 +113,15 @@ const Dashboard: React.FC = () => {
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => <Delivery data={item} />}
       />
+
+      <ButtonsContainer>
+        <Button onPress={handlelistPendent} status={statusPendente}>
+          <ButtonText status={statusPendente}>Pendentes</ButtonText>
+        </Button>
+        <Button onPress={handleListDelivered} status={!statusPendente}>
+          <ButtonText status={!statusPendente}>Entregues</ButtonText>
+        </Button>
+      </ButtonsContainer>
     </Container>
   );
 };

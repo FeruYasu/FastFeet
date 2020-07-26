@@ -8,7 +8,9 @@ export default {
     progress: '#34c883',
     productTitle: '#000',
     subtitle: '#d1d1d1',
-    background: '#f5f5f5',
+    background: '#f8f7ff',
+    cardBackground: '#fff',
+    buttonBorder: '#f2f1f7',
     text: '#333',
 
     inputBackground: '#fff',

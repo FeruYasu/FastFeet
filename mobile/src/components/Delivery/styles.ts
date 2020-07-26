@@ -6,8 +6,12 @@ interface Status {
 }
 
 export const Container = styled.View`
-  border-radius: 4px;
-  margin-bottom: 20px;
+  background: #fff;
+  margin: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 3.84px #000;
+  shadow-opacity: 0.25;
+  elevation: 10;
 `;
 
 export const TitleContainer = styled.View`

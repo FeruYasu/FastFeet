@@ -1,9 +1,9 @@
-import styled from 'styled-components/native';
-import { TextInput } from 'react-native';
+import styled, { css } from 'styled-components/native';
+import { TextInput, TouchableOpacity } from 'react-native';
 
 export const Container = styled.View`
   flex: 1;
-  background: #fff;
+  background: ${(props) => props.theme.colors.background};
 `;
 
 export const Header = styled.View`
@@ -44,7 +44,16 @@ export const City = styled.Text`
   margin-left: 5px;
 `;
 
-export const ProfileImage = styled.Text`
+export const ProfileImage = styled.Image`
+  height: 68px;
+  width: 68px;
+  border-radius: 34px;
+  display: flex;
+  padding-top: 10px;
+  margin-right: 20px;
+`;
+
+export const ProfileText = styled.Text`
   font-size: 32px;
   background: #f4effc;
   color: #a28fd0;
@@ -86,9 +95,46 @@ export const Input = styled(TextInput)`
 
 export const DeliveryList = styled.FlatList.attrs({
   showVerticalScrollIndicator: false,
-  contentContainerSTyle: { padding: 30 },
-})`
-  margin: 10px 20px;
+  contentContainerStyle: { flexGrow: 1 },
+})``;
+
+export const ButtonsContainer = styled.View`
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
 `;
 
-export const LogoutButton = styled.Button``;
+interface ButtonProps {
+  status: boolean;
+}
+
+export const Button = styled(TouchableOpacity)<ButtonProps>`
+  flex: 1;
+  background: ${(props) => props.theme.colors.background};
+  height: 50px;
+  justify-content: center;
+  border-top-color: ${(props) => props.theme.colors.buttonBorder};
+  border-top-width: 1px;
+
+  ${(props) =>
+    props.status &&
+    css`
+      border-style: solid;
+      background: #fff;
+      border-top-color: ${props.theme.colors.accent};
+      border-top-width: 3px;
+    `}
+`;
+
+export const ButtonText = styled.Text`
+  color: ${(props) => props.theme.colors.subtitle};
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+
+  ${(props) =>
+    props.status &&
+    css`
+      color: ${props.theme.colors.primary};
+    `}
+`;

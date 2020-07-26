@@ -13,7 +13,7 @@ interface Courier {
   id: string;
   name: string;
   email: string;
-  avatar: string;
+  avatar_url: string;
 }
 
 interface AuthState {
