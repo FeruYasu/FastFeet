@@ -65,10 +65,12 @@ export const StatusInfo = styled.View`
 
 export const DateContainer = styled.View`
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
-export const Date = styled.View``;
+export const Date = styled.View`
+  flex: 1;
+`;
 
 export const ButtonsContainer = styled.View`
   position: absolute;

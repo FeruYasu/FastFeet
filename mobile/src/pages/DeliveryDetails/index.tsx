@@ -27,6 +27,7 @@ interface RouteParams {
     start_date: string;
     end_date: string;
     product: string;
+    created_at: string;
     recipient: {
       city: string;
       name: string;
@@ -49,6 +50,7 @@ const DeliveryDetails: React.FC = () => {
   const [status, setStatus] = useState('Pendente');
   const [startDate, setStartDate] = useState('--/--/--');
   const [endDate, setEndDate] = useState('--/--/--');
+  const [createdAt, setCreatedAt] = useState('--/--/--');
 
   useEffect(() => {
     if (data.start_date) {
@@ -64,6 +66,13 @@ const DeliveryDetails: React.FC = () => {
       });
       setEndDate(formatDate);
       setStatus('Entregue');
+    }
+
+    if (data.created_at) {
+      const formatDate = format(parseISO(data.created_at), "dd'/'MM'/'yyyy", {
+        locale: pt,
+      });
+      setCreatedAt(formatDate);
     }
   }, [data]);
 
@@ -91,8 +100,16 @@ const DeliveryDetails: React.FC = () => {
           <Icon name="event" size={30} color="#ffbd42" />
           <Title>Situação da entrega</Title>
         </TitleContainer>
-        <InfoLabel>STATUS</InfoLabel>
-        <Info>{status}</Info>
+        <DateContainer>
+          <Date>
+            <InfoLabel>STATUS</InfoLabel>
+            <Info>{status}</Info>
+          </Date>
+          <Date>
+            <InfoLabel>CRIADO EM</InfoLabel>
+            <Info>{createdAt}</Info>
+          </Date>
+        </DateContainer>
         <DateContainer>
           <Date>
             <InfoLabel>DATA DE RETIRADA</InfoLabel>

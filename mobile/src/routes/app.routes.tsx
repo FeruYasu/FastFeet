@@ -8,8 +8,7 @@ import { StackNavigationOptions } from '@react-navigation/stack';
 import { useTheme, useNavigation } from '@react-navigation/native';
 import Dashboard from '../pages/Dashboard';
 import DeliveryDetails from '../pages/DeliveryDetails';
-// import CreateAppointment from '../pages/CreateAppointment';
-// import AppointmentCreated from '../pages/AppointmentCreated';
+import InformProblem from '../pages/InformProblem';
 
 const App = createStackNavigator();
 
@@ -54,10 +53,35 @@ const AppRoutes: React.FC = () => {
         })}
       />
 
-      {/* <App.Screen name="CreateAppointment" component={CreateAppointment} />
-    <App.Screen name="AppointmentCreated" component={AppointmentCreated} />
-
-    <App.Screen name="Profile" component={Profile} /> */}
+      <App.Screen
+        name="InformProblem"
+        component={InformProblem}
+        options={({ navigation }) => ({
+          headerShown: true,
+          title: 'Informar um problema',
+          headerTintColor: '#fff',
+          headerTitleStyle: { marginTop: 40, fontSize: 22 },
+          headerStyle: {
+            backgroundColor: colors.primary,
+            shadowColor: 'transparent',
+            elevation: 0,
+          },
+          headerTitleAlign: 'center',
+          headerLeftContainerStyle: {
+            marginLeft: 20,
+            marginTop: 40,
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('DeliveryDetails');
+              }}
+            >
+              <Icon name="chevron-left" size={20} color="#FFF" />
+            </TouchableOpacity>
+          ),
+        })}
+      />
     </App.Navigator>
   );
 };
