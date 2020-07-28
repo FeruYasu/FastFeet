@@ -8,7 +8,7 @@ interface Status {
 export const Container = styled.View`
   background: #fff;
   margin: 10px 20px;
-  border-radius: 10px;
+  border-radius: 6px;
   box-shadow: 0px 2px 3.84px #000;
   shadow-opacity: 0.25;
   elevation: 10;
@@ -90,6 +90,8 @@ export const DetailsContainer = styled.View`
   background: #fef3d5;
   flex-direction: row;
   justify-content: space-between;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
   margin-top: 12px;
   align-items: flex-end;
   padding: 12px 15px;

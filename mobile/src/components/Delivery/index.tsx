@@ -24,6 +24,11 @@ interface DeliveryData {
     product: string;
     recipient: {
       city: string;
+      name: string;
+      zipcode: string;
+      state: string;
+      number: number;
+      street: string;
     };
   };
 }

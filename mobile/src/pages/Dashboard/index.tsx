@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
-import { View } from 'react-native';
 import { useAuth } from '../../hooks/auth';
 
 import api from '../../services/api';
@@ -37,6 +36,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     async function loadDeliveries(): Promise<void> {
       const response = await api.get(`/couriers/1/deliveries`);
+      console.log(response.data);
 
       setDeliveries(response.data);
     }
@@ -45,6 +45,7 @@ const Dashboard: React.FC = () => {
   }, []);
 
   async function handlelistPendent(): Promise<void> {
+    setStatusPendente(!statusPendente);
     const { data } = await api.get(`/couriers/1/deliveries`);
     const newList = data.filter((delivery) => {
       if (delivery.start_date === null) {
@@ -57,6 +58,7 @@ const Dashboard: React.FC = () => {
   }
 
   async function handleListDelivered(): Promise<void> {
+    setStatusPendente(!statusPendente);
     const { data } = await api.get(`/couriers/1/deliveries`);
 
     const newList = data.filter((delivery) => {
@@ -100,7 +102,7 @@ const Dashboard: React.FC = () => {
           <Title>Entregas</Title>
           <CityContainer>
             <Icon name="place" size={22} color="#ffbd42" />
-            <City>Rio do Sul</City>
+            <City>{deliveries[0]?.recipient.city}</City>
           </CityContainer>
         </TitleContainer>
       </Header>
