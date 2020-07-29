@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useAuth } from '../../hooks/auth';
+
 import {
   Container,
   TitleContainer,
@@ -34,6 +36,7 @@ interface DeliveryData {
 }
 
 const Delivery: React.FC<DeliveryData> = ({ data }) => {
+  const { theme } = useAuth();
   const [statusRetirado, setStatusRetirado] = useState(false);
   const [statusEntregue, setStatusEntregue] = useState(false);
 
@@ -50,7 +53,7 @@ const Delivery: React.FC<DeliveryData> = ({ data }) => {
   return (
     <Container>
       <TitleContainer>
-        <Icon name="local-shipping" size={30} color="#7D40E7" />
+        <Icon name="local-shipping" size={30} color={theme.colors.cardIcon} />
         <Title>{data.product}</Title>
       </TitleContainer>
       <StatusContainer>
@@ -73,7 +76,7 @@ const Delivery: React.FC<DeliveryData> = ({ data }) => {
         >
           <DetailsButtonText>Detalhes</DetailsButtonText>
         </DetailsButton>
-        <Icon name="arrow-forward" size={26} color="#4a31cd" />
+        <Icon name="arrow-forward" size={26} color={theme.colors.cardIcon} />
       </DetailsContainer>
     </Container>
   );

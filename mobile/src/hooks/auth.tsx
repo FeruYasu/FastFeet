@@ -6,8 +6,11 @@ import React, {
   useEffect,
 } from 'react';
 
+import { DefaultTheme } from 'styled-components';
 import AsyncStorage from '@react-native-community/async-storage';
 import api from '../services/api';
+
+import themes from '../styles/themes';
 
 interface Courier {
   id: string;
@@ -30,6 +33,10 @@ interface AuthContextData {
   loading: boolean;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
+  theme: DefaultTheme;
+  setTheme(theme: DefaultTheme): void;
+  updateUser(courier: Courier): Promise<void>;
+  changeTheme(): void;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -47,6 +54,7 @@ function useAuth(): AuthContextData {
 const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>({} as AuthState);
   const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState<DefaultTheme>(themes.light);
 
   useEffect(() => {
     async function loadStorageData(): Promise<void> {
@@ -66,6 +74,18 @@ const AuthProvider: React.FC = ({ children }) => {
 
     loadStorageData();
   }, []);
+
+  const updateUser = useCallback(
+    async (courier: Courier) => {
+      await AsyncStorage.setItem('@FastFeet:user', JSON.stringify(courier));
+
+      setData({
+        token: data.token,
+        courier,
+      });
+    },
+    [setData, data.token]
+  );
 
   const signIn = useCallback(async ({ id }) => {
     const response = await api.post('/couriersessions', {
@@ -90,6 +110,16 @@ const AuthProvider: React.FC = ({ children }) => {
     setData({} as AuthState);
   }, []);
 
+  const changeTheme = useCallback(() => {
+    AsyncStorage.setItem('@FastFeet:theme', JSON.stringify(theme));
+
+    if (theme.title === 'dark') {
+      setTheme(themes.light);
+    } else {
+      setTheme(themes.dark);
+    }
+  }, [theme]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -97,6 +127,10 @@ const AuthProvider: React.FC = ({ children }) => {
         loading,
         signIn,
         signOut,
+        updateUser,
+        theme,
+        setTheme,
+        changeTheme,
       }}
     >
       {children}

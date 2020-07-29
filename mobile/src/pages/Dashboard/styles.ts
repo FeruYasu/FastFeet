@@ -44,6 +44,8 @@ export const City = styled.Text`
   margin-left: 5px;
 `;
 
+export const ProfileButton = styled.TouchableOpacity``;
+
 export const ProfileImage = styled.Image`
   height: 68px;
   width: 68px;

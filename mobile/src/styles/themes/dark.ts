@@ -1,0 +1,26 @@
+export default {
+  title: 'dark',
+  dark: true,
+
+  colors: {
+    primary: '#4a31cd',
+    accent: '#ffd280',
+    title: '#fff',
+    header: '#090e11',
+    progress: '#34c883',
+    productTitle: '#fff',
+    subtitle: '#d1d1d1',
+    background: '#090e11',
+    cardBackground: '#131221',
+    cardIcon: '#ffd280',
+    buttonBorder: '#f2f1f7',
+    buttonText: '#090e11',
+    text: '#bec0c2',
+    card: 'rgb(255, 255, 255)',
+    cardButton: '#ffe596',
+    border: 'rgb(199, 199, 204)',
+    notification: 'rgb(255, 69, 58)',
+    inputBackground: '#131221',
+    inputPlaceholder: '#6b6b6e',
+  },
+};

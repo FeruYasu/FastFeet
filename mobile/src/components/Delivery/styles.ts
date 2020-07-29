@@ -6,7 +6,7 @@ interface Status {
 }
 
 export const Container = styled.View`
-  background: #fff;
+  background: ${(props) => props.theme.colors.cardBackground};
   margin: 10px 20px;
   border-radius: 6px;
   box-shadow: 0px 2px 3.84px #000;
@@ -87,7 +87,7 @@ export const Label = styled.Text<Status>`
 `;
 
 export const DetailsContainer = styled.View`
-  background: #fef3d5;
+  background: ${(props) => props.theme.colors.cardButton};
   flex-direction: row;
   justify-content: space-between;
   border-bottom-right-radius: 6px;

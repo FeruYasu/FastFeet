@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components/native';
-import FeatherIcon from 'react-native-vector-icons/Feather';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 interface ContainerProps {
   isFocused: boolean;
@@ -10,10 +10,10 @@ export const Container = styled.View<ContainerProps>`
   width: 100%;
   height: 60px;
   padding: 0 16px;
-  background: ${(props) => props.theme.colors.background};
-  border-radius: 10px;
+  background: ${(props) => props.theme.colors.inputBackground};
+  border-radius: 4px;
   margin-bottom: 8px;
-  border-width: 2px;
+  border-width: 0.5px;
   border-color: #232129;
 
   flex-direction: row;
@@ -39,6 +39,13 @@ export const TextInput = styled.TextInput`
   font-family: 'RobotoSlab-Regular';
 `;
 
-export const Icon = styled(FeatherIcon)`
+export const Icon = styled(FontAwesome5)`
   margin-right: 16px;
+`;
+
+export const Border = styled.View`
+  border-right-width: 1px;
+  border-color: ${(props) => props.theme.colors.inputPlaceholder};
+  height: 20px;
+  margin-right: 5px;
 `;

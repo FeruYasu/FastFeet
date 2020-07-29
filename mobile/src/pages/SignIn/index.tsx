@@ -83,7 +83,7 @@ const SignIn: React.FC = () => {
         <Input
           keyboardType="numeric"
           name="id"
-          icon="mail"
+          icon="user-alt"
           placeholder="Informe seu ID de cadastro"
         />
 

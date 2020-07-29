@@ -9,7 +9,8 @@ import React, {
 import { TextInputProps } from 'react-native';
 import { useField } from '@unform/core';
 
-import { Container, TextInput, Icon } from './styles';
+import { Container, TextInput, Icon, Border } from './styles';
+import { useAuth } from '../../hooks/auth';
 
 interface InputProps extends TextInputProps {
   name: string;
@@ -29,8 +30,8 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
   { name, icon, containerStyle = {}, ...rest },
   ref
 ) => {
+  const { theme } = useAuth();
   const inputElementRef = useRef<any>(null);
-
   const { registerField, defaultValue = '', fieldName, error } = useField(name);
   const inputValueRef = useRef<InputValueReference>({ value: defaultValue });
 
@@ -70,15 +71,12 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
 
   return (
     <Container style={containerStyle} isFocused={isFocused} isErrored={!!error}>
-      <Icon
-        name={icon}
-        size={20}
-        color={isFocused || isFilled ? '#ff9000' : '#666360'}
-      />
+      <Icon name={icon} size={20} color={theme.colors.accent} />
+      <Border />
       <TextInput
         ref={inputElementRef}
         keyboardAppearance="dark"
-        placeholderTextColor="#666360"
+        placeholderTextColor={theme.colors.inputPlaceholder}
         defaultValue={defaultValue}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}

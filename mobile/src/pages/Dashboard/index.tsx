@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useAuth } from '../../hooks/auth';
 
 import api from '../../services/api';
@@ -11,6 +12,7 @@ import {
   Container,
   Header,
   Top,
+  ProfileButton,
   ProfileImage,
   ProfileText,
   Text,
@@ -36,7 +38,6 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     async function loadDeliveries(): Promise<void> {
       const response = await api.get(`/couriers/1/deliveries`);
-      console.log(response.data);
 
       setDeliveries(response.data);
     }
@@ -70,20 +71,27 @@ const Dashboard: React.FC = () => {
 
     setDeliveries(newList);
   }
-  async function handleLogout(): Promise<void> {
+
+  const handleLogout = useCallback(() => {
     signOut();
     navigation.navigate('SignIn');
-  }
+  }, [navigation, signOut]);
+
+  const navigateToProfile = useCallback(() => {
+    navigation.navigate('Profile');
+  }, [navigation]);
 
   return (
     <Container>
       <Header>
         <Top>
-          {user.avatar_url ? (
-            <ProfileImage source={{ uri: user.avatar_url }} />
-          ) : (
-            <ProfileText>user.name</ProfileText>
-          )}
+          <ProfileButton onPress={navigateToProfile}>
+            {user.avatar_url ? (
+              <ProfileImage source={{ uri: user.avatar_url }} />
+            ) : (
+              <ProfileText>user.name</ProfileText>
+            )}
+          </ProfileButton>
 
           <NameContainer>
             <Text>Bem vindo de volta,</Text>
