@@ -30,7 +30,7 @@ import {
 
 const Dashboard: React.FC = () => {
   const navigation = useNavigation();
-  const { user, signOut } = useAuth();
+  const { user, signOut, theme } = useAuth();
   const [statusPendente, setStatusPendente] = useState(true);
   const [deliveries, setDeliveries] = useState([]);
   const [filter, setFilter] = useState();
@@ -102,20 +102,24 @@ const Dashboard: React.FC = () => {
             onPress={handleLogout}
             name="exit-to-app"
             size={30}
-            color="#ffbd42"
+            color={theme.colors.accent}
           />
         </Top>
 
         <TitleContainer>
           <Title>Entregas</Title>
           <CityContainer>
-            <Icon name="place" size={22} color="#ffbd42" />
+            <Icon name="place" size={22} color={theme.colors.accent} />
             <City>{deliveries[0]?.recipient.city}</City>
           </CityContainer>
         </TitleContainer>
       </Header>
 
-      <Input value={filter} placeholder="Filtrar por bairro" />
+      <Input
+        value={filter}
+        placeholder="Filtrar por bairro"
+        placeholderTextColor={theme.colors.inputPlaceholder}
+      />
 
       <DeliveryList
         data={deliveries}

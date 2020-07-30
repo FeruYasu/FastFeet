@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 
+import { Form } from '@unform/mobile';
 import { ImageBackground } from 'react-native';
 import Button from '../../components/Button';
 
@@ -8,6 +9,7 @@ export const Container = styled.View`
   justify-content: center;
   align-items: center;
   background-color: ${(props) => props.theme.colors.primary};
+  justify-content: space-evenly;
 `;
 
 export const BackgroundImage = styled(ImageBackground)`
@@ -25,11 +27,17 @@ export const LogoContainer = styled.View`
   margin-bottom: 50px;
 `;
 
+export const LogoIcon = styled.Image``;
+
 export const TextContainer = styled.View`
   display: flex;
   width: 100%;
   flex-direction: column;
   justify-content: flex-start;
+`;
+
+export const FormContainer = styled(Form)`
+  padding: 10px 20px;
 `;
 
 export const YellowText = styled.Text`
@@ -60,6 +68,7 @@ export const ForgotPasswordText = styled.Text`
   color: #f4ede8;
   font-size: 16px;
   font-family: 'RobotoSlab-Regular';
+  margin: auto;
 `;
 
 export const FormInput = styled.TextInput`

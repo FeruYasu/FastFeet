@@ -3,12 +3,12 @@ import Button from '../../components/Button';
 
 export const Container = styled.View`
   flex: 1;
-  background: #fff;
+  background: ${(props) => props.theme.colors.background};
 `;
 
 export const HeaderColor = styled.View`
   height: 60px;
-  background: ${(props) => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.header};
 `;
 
 export const ConfirmDeliveryContainer = styled.View`
@@ -48,7 +48,7 @@ export const ExplanationText = styled.Text`
   font-size: 12px;
   text-align: center;
   flex: 1;
-
+  color: ${(props) => props.theme.colors.text};
   max-width: 200px;
 `;
 
@@ -76,9 +76,9 @@ export const ImageIcon = styled.Image`
 
 export const ModalText = styled.Text`
   font-size: 30px;
-  color: #fff;
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export const ModalSubText = styled.Text`
-  color: #fff;
+  color: ${(props) => props.theme.colors.text};
 `;

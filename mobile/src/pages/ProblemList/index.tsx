@@ -7,7 +7,6 @@ import api from '../../services/api';
 import {
   Container,
   HeaderColor,
-  Title,
   ProblemListContainer,
   Problem,
   Description,

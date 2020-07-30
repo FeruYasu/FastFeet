@@ -15,6 +15,8 @@ import { useAuth } from '../../hooks/auth';
 interface InputProps extends TextInputProps {
   name: string;
   icon: string;
+  password?: boolean;
+  handleSecureText();
   containerStyle?: {};
 }
 
@@ -27,7 +29,7 @@ interface InputRef {
 }
 
 const Input: React.RefForwardingComponent<InputRef, InputProps> = (
-  { name, icon, containerStyle = {}, ...rest },
+  { name, icon, password, handleSecureText, containerStyle = {}, ...rest },
   ref
 ) => {
   const { theme } = useAuth();
@@ -85,6 +87,16 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
         }}
         {...rest}
       />
+      {password ? (
+        <Icon
+          name="eye"
+          size={20}
+          color={theme.colors.primary}
+          onPress={handleSecureText}
+        />
+      ) : (
+        <></>
+      )}
     </Container>
   );
 };

@@ -10,7 +10,7 @@ export const Header = styled.View`
   flex-direction: column;
   width: 100%;
   padding: 60px 20px 20px;
-  background: ${(props) => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.header};
 `;
 
 export const Top = styled.View`
@@ -87,9 +87,10 @@ export const Input = styled(TextInput)`
   margin: -30px 20px 0 20px;
   border-radius: 6px;
   padding-left: 20px;
-  background: #fff;
+  background: ${(props) => props.theme.colors.inputBackground};
   height: 60px;
   border: 1px solid ${(props) => props.theme.colors.subtitle};
+  color: ${(props) => props.theme.colors.text};
   box-shadow: 0px 2px 3.84px #000;
   shadow-opacity: 0.25;
   elevation: 10;
@@ -122,7 +123,7 @@ export const Button = styled(TouchableOpacity)<ButtonProps>`
     props.status &&
     css`
       border-style: solid;
-      background: #fff;
+      background: ${props.theme.colors.inputBackground};
       border-top-color: ${props.theme.colors.accent};
       border-top-width: 3px;
     `}
@@ -137,6 +138,6 @@ export const ButtonText = styled.Text`
   ${(props) =>
     props.status &&
     css`
-      color: ${props.theme.colors.primary};
+      color: ${props.theme.colors.accent};
     `}
 `;

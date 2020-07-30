@@ -4,24 +4,24 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { useTheme } from '@react-navigation/native';
 import Dashboard from '../pages/Dashboard';
 import DeliveryDetails from '../pages/DeliveryDetails';
 import InformProblem from '../pages/InformProblem';
 import ProblemList from '../pages/ProblemList';
 import ConfirmDelivery from '../pages/ConfirmDelivery';
 import Profile from '../pages/Profile';
+import { useAuth } from '../hooks/auth';
 
 const App = createStackNavigator();
 
 const AppRoutes: React.FC = () => {
-  const { colors } = useTheme();
+  const { theme } = useAuth();
 
   return (
     <App.Navigator
       screenOptions={{
         headerShown: false,
-        cardStyle: { backgroundColor: colors.primary },
+        cardStyle: { backgroundColor: theme.colors.primary },
       }}
     >
       <App.Screen name="Dashboard" component={Dashboard} />
@@ -34,7 +34,7 @@ const AppRoutes: React.FC = () => {
           headerTintColor: '#fff',
           headerTitleStyle: { marginTop: 40, fontSize: 22 },
           headerStyle: {
-            backgroundColor: colors.primary,
+            backgroundColor: theme.colors.header,
             shadowColor: 'transparent',
             elevation: 0,
           },
@@ -64,7 +64,7 @@ const AppRoutes: React.FC = () => {
           headerTintColor: '#fff',
           headerTitleStyle: { marginTop: 40, fontSize: 22 },
           headerStyle: {
-            backgroundColor: colors.primary,
+            backgroundColor: theme.colors.header,
             shadowColor: 'transparent',
             elevation: 0,
           },
@@ -94,7 +94,7 @@ const AppRoutes: React.FC = () => {
           headerTintColor: '#fff',
           headerTitleStyle: { marginTop: 40, fontSize: 22 },
           headerStyle: {
-            backgroundColor: colors.primary,
+            backgroundColor: theme.colors.header,
             shadowColor: 'transparent',
             elevation: 0,
           },
@@ -124,7 +124,7 @@ const AppRoutes: React.FC = () => {
           headerTintColor: '#fff',
           headerTitleStyle: { marginTop: 40, fontSize: 24 },
           headerStyle: {
-            backgroundColor: colors.primary,
+            backgroundColor: theme.colors.header,
             shadowColor: 'transparent',
             elevation: 0,
           },
@@ -154,7 +154,7 @@ const AppRoutes: React.FC = () => {
           headerTintColor: '#fff',
           headerTitleStyle: { marginTop: 40, fontSize: 22 },
           headerStyle: {
-            backgroundColor: colors.primary,
+            backgroundColor: theme.colors.header,
             shadowColor: 'transparent',
             elevation: 0,
           },

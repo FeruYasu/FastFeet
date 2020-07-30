@@ -24,11 +24,8 @@ import { useAuth } from '../../hooks/auth';
 import {
   Container,
   HeaderColor,
-  BackButton,
-  Title,
   UserAvatarButton,
   UserAvatar,
-  TitleContainer,
   ThemeContainer,
   ThemeText,
 } from './styles';

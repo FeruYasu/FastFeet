@@ -21,6 +21,7 @@ import {
   Buttontext,
   Border,
 } from './styles';
+import { useAuth } from '../../hooks/auth';
 
 interface RouteParams {
   data: {
@@ -47,6 +48,7 @@ const DeliveryDetails: React.FC = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const { data } = route.params as RouteParams;
+  const { theme } = useAuth();
   const [status, setStatus] = useState('Pendente');
   const [startDate, setStartDate] = useState('--/--/--');
   const [endDate, setEndDate] = useState('--/--/--');
@@ -81,7 +83,7 @@ const DeliveryDetails: React.FC = () => {
       <HeaderColor />
       <DeliveryInfo>
         <TitleContainer>
-          <Icon name="local-shipping" size={30} color="#ffbd42" />
+          <Icon name="local-shipping" size={30} color={theme.colors.accent} />
           <Title>Informações da entrega</Title>
         </TitleContainer>
         <InfoLabel>DESTINATÁRIO</InfoLabel>
@@ -97,7 +99,7 @@ const DeliveryDetails: React.FC = () => {
       </DeliveryInfo>
       <StatusInfo>
         <TitleContainer>
-          <Icon name="event" size={30} color="#ffbd42" />
+          <Icon name="event" size={30} color={theme.colors.accent} />
           <Title>Situação da entrega</Title>
         </TitleContainer>
         <DateContainer>

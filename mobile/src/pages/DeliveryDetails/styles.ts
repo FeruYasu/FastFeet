@@ -8,7 +8,7 @@ export const Container = styled.View`
 
 export const HeaderColor = styled.View`
   height: 80px;
-  background: ${(props) => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.header};
 `;
 
 export const DeliveryInfo = styled.View`
@@ -17,7 +17,7 @@ export const DeliveryInfo = styled.View`
   margin: 20px;
   padding: 10px;
   margin-top: -50px;
-  background: #fff;
+  background: ${(props) => props.theme.colors.cardBackground};
   margin-bottom: 0px;
   shadow-color: #000;
   shadow-opacity: 0.2;
@@ -32,7 +32,7 @@ export const TitleContainer = styled.View`
 `;
 
 export const Title = styled.Text`
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.detailsText};
   margin-left: 10px;
   font-weight: bold;
   font-size: 18px;
@@ -40,7 +40,7 @@ export const Title = styled.Text`
 
 export const InfoLabel = styled.Text`
   font-weight: bold;
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.detailsText};
   font-size: 12px;
   margin-bottom: 8px;
 `;
@@ -48,7 +48,7 @@ export const InfoLabel = styled.Text`
 export const Info = styled.Text`
   font-size: 16px;
   margin-bottom: 10px;
-  color: #777;
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export const StatusInfo = styled.View`
@@ -56,7 +56,7 @@ export const StatusInfo = styled.View`
   border-radius: 4px;
   margin: 8px 20px;
   padding: 10px;
-  background: #fff;
+  background: ${(props) => props.theme.colors.cardBackground};
   shadow-color: #000;
   shadow-opacity: 0.2;
   shadow-radius: 1.41px;
@@ -79,7 +79,7 @@ export const ButtonsContainer = styled.View`
   border: #0000001a;
   padding: 10px;
   flex-direction: row;
-  background: #fff;
+  background: ${(props) => props.theme.colors.cardBackground};
   justify-content: space-evenly;
 `;
 
@@ -88,7 +88,7 @@ export const Button = styled(TouchableOpacity)`
 `;
 
 export const Buttontext = styled.Text`
-  color: #999999;
+  color: ${(props) => props.theme.colors.text};
   font-size: 12px;
   width: 60px;
   text-align: center;
@@ -96,5 +96,5 @@ export const Buttontext = styled.Text`
 
 export const Border = styled.View`
   height: 100%;
-  border: 1px solid #eee;
+  border: 1px solid ${(props) => props.theme.colors.inputPlaceholder};
 `;

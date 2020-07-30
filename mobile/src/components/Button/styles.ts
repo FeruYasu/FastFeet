@@ -6,7 +6,7 @@ export const Container = styled(BaseButton)`
   border-radius: 4px;
   align-items: center;
   justify-content: center;
-  background: ${(props) => props.theme.colors.accent};
+  background: ${(props) => props.theme.colors.button};
 `;
 
 export const Text = styled.Text`

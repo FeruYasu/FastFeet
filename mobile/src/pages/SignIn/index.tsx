@@ -1,13 +1,13 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Image, Alert } from 'react-native';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
-import { Form } from '@unform/mobile';
 import Input from '../../components/Input';
 
 import { useAuth } from '../../hooks/auth';
 
-import logo from '../../assets/logo-white.png';
+import logofastfeet from '../../assets/logofastfeet.jpg';
+import logoff from '../../assets/logoff.png';
 import backgroundImage from '../../assets/placeholder.png';
 
 import getValidationErrors from '../../utils/getValidationErrors';
@@ -16,8 +16,10 @@ import {
   Container,
   TextContainer,
   LogoContainer,
+  LogoIcon,
   YellowText,
   BackgroundImage,
+  FormContainer,
   Text,
   SmallText,
   ForgotPassword,
@@ -31,6 +33,7 @@ interface SignInFormData {
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const [secureText, setSecureText] = useState(true);
 
   const { signIn } = useAuth();
 
@@ -68,8 +71,8 @@ const SignIn: React.FC = () => {
     <Container>
       <BackgroundImage source={backgroundImage}>
         <LogoContainer>
-          <Image source={logo} />
-          <Image source={logo} />
+          <LogoIcon source={logoff} />
+          <Image source={logofastfeet} />
         </LogoContainer>
 
         <TextContainer>
@@ -79,7 +82,7 @@ const SignIn: React.FC = () => {
         </TextContainer>
       </BackgroundImage>
 
-      <Form ref={formRef} onSubmit={handleSubmit}>
+      <FormContainer ref={formRef} onSubmit={handleSubmit}>
         <Input
           keyboardType="numeric"
           name="id"
@@ -87,18 +90,29 @@ const SignIn: React.FC = () => {
           placeholder="Informe seu ID de cadastro"
         />
 
-        <ForgotPassword>
-          <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
-        </ForgotPassword>
+        <Input
+          secureTextEntry={secureText}
+          name="password"
+          icon="lock"
+          password
+          placeholder="Sua senha"
+          handleSecureText={() => {
+            setSecureText(!secureText);
+          }}
+        />
 
         <SubmitButton
           onPress={() => {
             formRef.current?.submitForm();
           }}
         >
-          Entrar no sistema
+          Entrar
         </SubmitButton>
-      </Form>
+
+        <ForgotPassword>
+          <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
+        </ForgotPassword>
+      </FormContainer>
     </Container>
   );
 };

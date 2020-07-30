@@ -68,16 +68,14 @@ const Delivery: React.FC<DeliveryData> = ({ data }) => {
         <Label color={statusRetirado}>RETIRADO</Label>
         <Label color={statusEntregue}>ENTREGUE</Label>
       </StatusLabel>
-      <DetailsContainer>
-        <DetailsButton
-          onPress={() => {
-            navigation.navigate('DeliveryDetails', { data });
-          }}
-        >
-          <DetailsButtonText>Detalhes</DetailsButtonText>
-        </DetailsButton>
-        <Icon name="arrow-forward" size={26} color={theme.colors.cardIcon} />
-      </DetailsContainer>
+      <DetailsButton
+        onPress={() => {
+          navigation.navigate('DeliveryDetails', { data });
+        }}
+      >
+        <DetailsButtonText>Detalhes</DetailsButtonText>
+        <Icon name="arrow-forward" size={26} color={theme.colors.buttonText} />
+      </DetailsButton>
     </Container>
   );
 };

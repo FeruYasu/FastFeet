@@ -86,7 +86,7 @@ export const Label = styled.Text<Status>`
     `}
 `;
 
-export const DetailsContainer = styled.View`
+export const DetailsButton = styled(TouchableOpacity)`
   background: ${(props) => props.theme.colors.cardButton};
   flex-direction: row;
   justify-content: space-between;
@@ -97,10 +97,8 @@ export const DetailsContainer = styled.View`
   padding: 12px 15px;
 `;
 
-export const DetailsButton = styled(TouchableOpacity)``;
-
 export const DetailsButtonText = styled.Text`
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.buttonText};
   font-weight: bold;
   font-size: 18px;
 `;
