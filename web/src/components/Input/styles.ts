@@ -7,7 +7,7 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  background:  #fff;
+  background: ${(props) => props.theme.colors.cardBackground};
   border-radius: 10px;
   padding: 16px 0;
   width: 100%;

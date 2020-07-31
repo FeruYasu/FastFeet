@@ -2,14 +2,38 @@ export default {
   title: 'dark',
 
   colors: {
-    primary: '#ff9000',
+    primary: '#6552cc',
+    accent: '#ffbd42',
     secundary: '#298349',
-    background: '#f5f5f5',
-    text: '#333',
-    nextAppointmentBackground: '#c9c9c9',
+    header: '#3b3b3b',
+    background: '#212121',
+    border: '#878787',
+    title: '#e0e0e0',
+    text: '#cfcfcf',
+    cardBackground: '#404040',
     calendar: '#ababab',
-    inputBackground: '#fff',
-    card: '#dbdbdb',
+    inputBackground: '#1a1a1a',
+    card: '#595959',
     cardtext: '#525252',
+  },
+
+  entregue: {
+    color: '#8bec8b;',
+    background: '#545454',
+  },
+
+  pendente: {
+    color: '#fffb91',
+    background: '#545454',
+  },
+
+  retirado: {
+    color: '#8bdbf3',
+    background: '#545454',
+  },
+
+  cancelado: {
+    color: '#ff8888',
+    background: '#545454',
   },
 };

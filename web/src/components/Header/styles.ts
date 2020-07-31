@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: #fff;
+  background: ${(props) => props.theme.colors.header};
   padding: 0 30px;
-  border: 1px solid #dddddd;
+  border-bottom: 1px solid ${(props) => props.theme.colors.border};
 `;
 
 export const Content = styled.div`
@@ -39,7 +39,7 @@ export const Content = styled.div`
   }
 
   .main-nav-active {
-    color: #000;
+    color: ${(props) => props.theme.colors.title};
   }
 
   aside {
@@ -83,4 +83,5 @@ export const Profile = styled.div`
 export const Name = styled.p`
   font-size: 14px;
   font-weight: 700;
+  color: ${(props) => props.theme.colors.text};
 `;

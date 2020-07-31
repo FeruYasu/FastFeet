@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
+import { darken, lighten } from 'polished';
 import { MdSearch } from 'react-icons/md';
 
 export const Container = styled.div`
-  background: #f5f5f5;
+  background: ${(props) => props.theme.colors.background};
   width: 100%;
   height: 100%;
   display: flex;
@@ -18,6 +18,7 @@ export const Content = styled.div`
 
   h1 {
     margin: 50px 0;
+    color: ${(props) => props.theme.colors.title};
   }
 
   ul {
@@ -29,6 +30,7 @@ export const Content = styled.div`
     li {
       font-size: 16px;
       font-weight: bold;
+      color: ${(props) => props.theme.colors.title};
     }
   }
 `;
@@ -41,7 +43,8 @@ export const ActionsContainer = styled.div`
   input {
     width: 237px;
     height: 36px;
-    background: #ffffff 0% 0% no-repeat padding-box;
+    background: ${(props) => props.theme.colors.inputBackground} 0% 0% no-repeat
+      padding-box;
     border: 1px solid #dddddd;
     border-radius: 4px;
     position: relative;
@@ -95,12 +98,12 @@ export const Courier = styled.div`
     height: 35px;
     width: 35px;
     border-radius: 50%;
-    background: #f4effc;
+    background: ${(props) => lighten(0.46, props.theme.colors.primary)};
     display: flex;
     place-items: center;
     justify-content: center;
     font-size: 16px;
-    color: ${darken(0.2, '#a28fd0')};
+    color: ${(props) => lighten(0.04, props.theme.colors.primary)};
   }
 `;
 
@@ -113,7 +116,7 @@ export const RecipientList = styled.div`
     grid-template-columns: 50px 1fr 1fr 50px;
     place-items: center;
     padding: 10px 20px;
-    background: #fff;
+    background: ${(props) => props.theme.colors.cardBackground};
     border-radius: 4px;
     margin-bottom: 20px;
     height: 57px;
@@ -121,7 +124,7 @@ export const RecipientList = styled.div`
 
   p {
     font-size: 16px;
-    color: #666666;
+    color: ${(props) => props.theme.colors.text};
   }
 
   button {
@@ -129,7 +132,7 @@ export const RecipientList = styled.div`
     place-items: center;
     background: none;
     border: none;
-    color: #c6c6c6;
+    color: ${(props) => props.theme.colors.text};
     padding: 0 5px;
     height: 36px;
   }

@@ -122,7 +122,7 @@ const HandleDelivery: React.FC = () => {
                     VOLTAR
                   </BackButton>
                 </Link>
-                <SaveButton type="submit" onClick={handleSubmit}>
+                <SaveButton type="submit">
                   <MdDone size={20} />
                   SALVAR
                 </SaveButton>

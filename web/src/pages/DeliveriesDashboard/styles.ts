@@ -8,40 +8,40 @@ interface ColorProps {
 
 const color = {
   Entregue: css`
-    color: #2ca42b;
-    background: #dff0df;
+    color: ${(props) => props.theme.entregue.color};
+    background: ${(props) => props.theme.entregue.background};
   `,
   Cancelado: css`
-    color: #de3b3b;
-    background: #fab0b0;
+    color: ${(props) => props.theme.cancelado.color};
+    background: ${(props) => props.theme.cancelado.background};
   `,
   Retirado: css`
-    color: #4d85ee;
-    background: #bad2ff;
+    color: ${(props) => props.theme.retirado.color};
+    background: ${(props) => props.theme.retirado.background};
   `,
   Pendente: css`
-    color: #c1bc35;
-    background: #f0f0df;
+    color: ${(props) => props.theme.pendente.color};
+    background: ${(props) => props.theme.pendente.background};
   `,
 };
 
 const background = {
   Entregue: css`
-    background-color: #2ca42b;
+    background-color: ${(props) => props.theme.entregue.color};
   `,
   Cancelado: css`
-    background-color: #de3b3b;
+    background-color: ${(props) => props.theme.cancelado.color};
   `,
   Retirado: css`
-    background-color: #4d85ee;
+    background-color: ${(props) => props.theme.retirado.color};
   `,
   Pendente: css`
-    background-color: #c1bc35;
+    background-color: ${(props) => props.theme.pendente.color};
   `,
 };
 
 export const Container = styled.div`
-  background: #f5f5f5;
+  background: ${(props) => props.theme.colors.background};
   width: 100%;
   height: 100%;
   display: flex;
@@ -56,6 +56,7 @@ export const Content = styled.div`
 
   h1 {
     margin: 50px 0;
+    color: ${(props) => props.theme.colors.title};
   }
 
   ul {
@@ -67,6 +68,7 @@ export const Content = styled.div`
     li {
       font-size: 16px;
       font-weight: bold;
+      color: ${(props) => props.theme.colors.title};
     }
   }
 `;
@@ -79,11 +81,13 @@ export const ActionsContainer = styled.div`
   input {
     width: 300px;
     height: 36px;
-    background: #ffffff 0% 0% no-repeat padding-box;
+    background: ${(props) => props.theme.colors.inputBackground} 0% 0% no-repeat
+      padding-box;
     border: 1px solid #dddddd;
     border-radius: 4px;
     position: relative;
     padding-left: 35px;
+    color: ${(props) => props.theme.colors.text};
 
     ::placeholder {
       color: #999999;
@@ -158,7 +162,8 @@ export const DeliveryList = styled.div`
     grid-template-columns: 50px 1fr 1fr 1fr 1fr 1fr 50px;
     place-items: center;
     padding: 10px 20px;
-    background: #fff;
+    background: ${(props) => props.theme.colors.cardBackground};
+
     border-radius: 4px;
     margin-bottom: 20px;
     height: 57px;
@@ -166,7 +171,7 @@ export const DeliveryList = styled.div`
 
   p {
     font-size: 16px;
-    color: #666666;
+    color: ${(props) => props.theme.colors.text};
   }
 
   button {
@@ -174,7 +179,7 @@ export const DeliveryList = styled.div`
     place-items: center;
     background: none;
     border: none;
-    color: #c6c6c6;
+    color: ${(props) => props.theme.colors.text};
     padding: 0 5px;
     height: 36px;
   }

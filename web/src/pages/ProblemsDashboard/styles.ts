@@ -3,7 +3,7 @@ import { lighten } from 'polished';
 import { MdSearch } from 'react-icons/md';
 
 export const Container = styled.div`
-  background: #f5f5f5;
+  background: ${(props) => props.theme.colors.background};
   width: 100%;
   height: 100%;
   display: flex;
@@ -18,6 +18,7 @@ export const Content = styled.div`
 
   h1 {
     margin: 50px 0;
+    color: ${(props) => props.theme.colors.title};
   }
 
   ul {
@@ -29,6 +30,7 @@ export const Content = styled.div`
     li {
       font-size: 16px;
       font-weight: bold;
+      color: ${(props) => props.theme.colors.title};
     }
 
     li:first-child {
@@ -45,25 +47,6 @@ export const IconSearch = styled(MdSearch)`
   color: #999999;
 `;
 
-export const Courier = styled.div`
-  display: flex;
-  justify-content: space-between;
-  place-items: center;
-
-  span {
-    margin-right: 5px;
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-    background: ${(props) => lighten(0.46, props.theme.colors.primary)};
-    display: flex;
-    place-items: center;
-    justify-content: center;
-    font-size: 16px;
-    color: ${(props) => lighten(0.04, props.theme.colors.primary)};
-  }
-`;
-
 export const ProblemList = styled.div`
   width: 100%;
   margin-top: 10px;
@@ -73,7 +56,7 @@ export const ProblemList = styled.div`
     grid-template-columns: 150px 1fr 50px;
     place-items: left;
     padding: 10px 20px;
-    background: #fff;
+    background: ${(props) => props.theme.colors.cardBackground};
     border-radius: 4px;
     margin-bottom: 20px;
     height: 57px;
@@ -81,6 +64,7 @@ export const ProblemList = styled.div`
 
     p:nth-child(2) {
       justify-self: flex-start;
+      color: ${(props) => props.theme.colors.text};
     }
   }
 
@@ -94,7 +78,7 @@ export const ProblemList = styled.div`
     place-items: center;
     background: none;
     border: none;
-    color: #c6c6c6;
+    color: ${(props) => props.theme.colors.text};
     padding: 0 5px;
     height: 36px;
   }

@@ -27,6 +27,11 @@ interface Courier {
 interface Recipient {
   name: string;
   id: number;
+  addinfos: string;
+}
+
+interface Request {
+  addinfos: string;
 }
 
 const HandleRecipient: React.FC = () => {
@@ -37,7 +42,7 @@ const HandleRecipient: React.FC = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    async function loadDelivery(): Promise<void> {
+    async function loadRecipients(): Promise<void> {
       const response = await api.get(`/recipients/${id}`);
 
       if (formRef.current) {
@@ -47,7 +52,7 @@ const HandleRecipient: React.FC = () => {
           zipcode: response.data.zipcode,
           state: response.data.state,
           city: response.data.city,
-          addInfos: response.data.addinfos ? response.data.addinfos : ' ',
+          addinfos: response.data.addinfos ? response.data.addinfos : ' ',
           number: response.data.number,
         });
       }
@@ -57,20 +62,26 @@ const HandleRecipient: React.FC = () => {
       setTitle('Edição de destinatário');
     }
 
-    loadDelivery();
+    loadRecipients();
   }, [id]);
 
-  const handleSubmit = useCallback(async () => {
-    if (formRef.current) {
-      if (id) {
-        await api.put(`deliveries/${id}`, formRef.current.getData());
-      } else {
-        await api.post('deliveries', formRef.current.getData());
-      }
+  const handleSubmit = useCallback(
+    async (data) => {
+      if (formRef.current) {
+        if (id) {
+          await api.put(`recipients/${id}`, data);
+        } else {
+          if (data.addinfos === '') {
+            data.addinfos = ' ';
+          }
+          await api.post('recipients', data);
+        }
 
-      history.push('/deliveries');
-    }
-  }, [history, id]);
+        history.push('/recipients');
+      }
+    },
+    [history, id],
+  );
 
   return (
     <>
@@ -87,7 +98,7 @@ const HandleRecipient: React.FC = () => {
                     VOLTAR
                   </BackButton>
                 </Link>
-                <SaveButton type="submit" onClick={handleSubmit}>
+                <SaveButton type="submit">
                   <MdDone size={20} />
                   SALVAR
                 </SaveButton>
@@ -109,7 +120,7 @@ const HandleRecipient: React.FC = () => {
               </InputContainer>
               <InputContainer>
                 <p>Complemento</p>
-                <Input name="addInfos" placeholder="Complemento do endereço" />
+                <Input name="addinfos" placeholder="Complemento do endereço" />
               </InputContainer>
               <InputContainer>
                 <p>Cidade</p>

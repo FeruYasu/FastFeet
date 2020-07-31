@@ -115,9 +115,8 @@ const RecipientDashboard: React.FC = () => {
                 <p>#{recipient.id}</p>
                 <p>{recipient.name}</p>
                 <p>
-                  {recipient.street}
-                  {recipient.number}, {recipient.city} - {recipient.state},
-                  {recipient.zipcode}
+                  {recipient.street} {recipient.number}, {recipient.city} -{' '}
+                  {recipient.state},{recipient.zipcode}
                 </p>
 
                 <div>

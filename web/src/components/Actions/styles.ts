@@ -7,7 +7,7 @@ export const Container = styled.div`
 export const ActionsPanel = styled.div`
   position: absolute;
   box-shadow: 0px 0px 2px #00000026;
-  background: #fff;
+  background: ${(props) => props.theme.colors.card};
   left: calc(50% - 75px);
   top: 5px;
   border-radius: 8px;
@@ -23,7 +23,7 @@ export const ActionsPanel = styled.div`
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 5px solid #fff;
+    border-bottom: 5px solid ${(props) => props.theme.colors.border};
   }
 `;
 
@@ -45,9 +45,13 @@ export const ActionList = styled.div`
     margin-left: 5px;
 
     p {
-      color: #999999;
+      color: ${(props) => props.theme.colors.text};
       font-size: 16px;
       margin-left: 10px;
+
+      &:hover {
+        color: ${(props) => props.theme.colors.title};
+      }
     }
   }
 `;
@@ -65,11 +69,15 @@ export const Action = styled.div`
     }
 
     p {
-      color: #999999;
       font-size: 16px;
       margin-left: 10px;
       text-align: left;
       width: 80%;
+      color: ${(props) => props.theme.colors.text};
+
+      &:hover {
+        color: ${(props) => props.theme.colors.title};
+      }
     }
   }
 `;

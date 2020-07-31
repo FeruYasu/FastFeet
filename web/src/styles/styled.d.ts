@@ -9,12 +9,35 @@ declare module 'styled-components' {
       accent: string;
       secundary: string;
       background: string;
+      header: string;
+      border: string;
+      title: string;
       text: string;
       calendar: string;
-      nextAppointmentBackground: string;
+      cardBackground: string;
       inputBackground: string;
       card: string;
       cardtext: string;
+    };
+
+    entregue: {
+      color: string;
+      background: string;
+    };
+
+    pendente: {
+      color: string;
+      background: string;
+    };
+
+    retirado: {
+      color: string;
+      background: string;
+    };
+
+    cancelado: {
+      color: string;
+      background: string;
     };
   }
 }
