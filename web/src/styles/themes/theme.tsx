@@ -1,11 +1,12 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import dark from './dark';
-import light from './light';
+import { useAuth } from '../../hooks/Auth';
 
 const Theme: React.FC = ({ children }) => {
-  return <ThemeProvider theme={dark}>{children}</ThemeProvider>;
+  const { themeContext } = useAuth();
+
+  return <ThemeProvider theme={themeContext}>{children}</ThemeProvider>;
 };
 
 export default Theme;

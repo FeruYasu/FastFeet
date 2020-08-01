@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  background: #f5f5f5;
+  background: ${(props) => props.theme.colors.background};
   width: 100%;
   height: 100vh;
   display: flex;
@@ -16,6 +16,7 @@ export const Content = styled.div`
 
   h1 {
     margin: 30px 0;
+    color: ${(props) => props.theme.colors.title};
   }
 
   form {
@@ -23,17 +24,17 @@ export const Content = styled.div`
     flex-direction: column;
 
     p {
-      color: #444444;
+      color: ${(props) => props.theme.colors.title};
       font-weight: bold;
       margin-top: 20px;
       margin-bottom: 10px;
     }
 
     input {
-      border: 1px solid #dddddd;
+      background: ${(props) => props.theme.colors.inputBackground} 0% 0%
+        no-repeat padding-box;
       height: 45px;
       border-radius: 4px;
-      color: #999999;
       padding: 10px;
       width: 100%;
     }
@@ -42,7 +43,7 @@ export const Content = styled.div`
 
 export const BoxContainer = styled.div`
   display: flex;
-  background: #fff;
+  background: ${(props) => props.theme.colors.cardBackground};
   padding: 10px 30px 40px 30px;
   border-radius: 4px;
   flex-wrap: wrap;
@@ -91,7 +92,7 @@ export const ButtonsContainer = styled.div`
 `;
 
 export const BackButton = styled.button`
-  background: #cccccc;
+  background: ${(props) => props.theme.colors.button};
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -104,12 +105,12 @@ export const BackButton = styled.button`
   justify-content: center;
 
   &:hover {
-    background: ${darken(0.03, '#cccccc')};
+    background: ${(props) => darken(0.03, props.theme.colors.button)};
   }
 `;
 
 export const SaveButton = styled.button`
-  background: #7d40e7;
+  background: ${(props) => props.theme.colors.primary};
   color: #fff;
   border: none;
   border-radius: 4px;

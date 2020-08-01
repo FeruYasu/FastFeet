@@ -43,7 +43,7 @@ export const Container = styled.div<ContainerProps>`
       background: #fff;
       height: 45px;
       padding: 0 15px;
-      color: #000;
+      color: ${(props) => props.theme.colors.text};
       width: 300px;
       border: 1px solid #dddddd;
       border-radius: 4px;

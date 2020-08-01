@@ -8,13 +8,13 @@ import { FiMail, FiLock } from 'react-icons/fi';
 
 import { Form } from '@unform/web';
 
-import logo from '../../assets/fastfeet-logo.png';
-import loginImg from '../../assets/login-photo.jpg';
+import logo from '../../assets/logoFF.png';
+import backgroudLogo from '../../assets/backgroundFF.svg';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
 
-import { Container, ImageContainer, Content } from './styles';
+import { Container, Content, BackgroundImage } from './styles';
 import { useAuth } from '../../hooks/Auth';
 
 interface SignInFormData {
@@ -66,6 +66,9 @@ const SignIn: React.FC = () => {
     <Container>
       <Content>
         <img src={logo} alt="FastFeet" />
+        <h1>
+          <strong>FAST</strong>FEET
+        </h1>
         <Form onSubmit={handleSubmit}>
           <Input
             name="email"
@@ -84,9 +87,7 @@ const SignIn: React.FC = () => {
           </button>
         </Form>
       </Content>
-      <ImageContainer>
-        <img src={loginImg} alt="Motoboy entregando a encomenda" />
-      </ImageContainer>
+      <BackgroundImage src={backgroudLogo} alt="FastFeet" />
     </Container>
   );
 };

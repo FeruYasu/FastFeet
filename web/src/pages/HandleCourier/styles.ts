@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 export const Container = styled.div`
-  background: #f5f5f5;
-  width: 100%;
+  background: ${(props) => props.theme.colors.background};
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -16,6 +15,7 @@ export const Content = styled.div`
 
   h1 {
     margin: 30px 0;
+    color: ${(props) => props.theme.colors.title};
   }
 
   form {
@@ -23,17 +23,17 @@ export const Content = styled.div`
     flex-direction: column;
 
     p {
-      color: #444444;
+      color: ${(props) => props.theme.colors.title};
       font-weight: bold;
       margin-top: 20px;
       margin-bottom: 10px;
     }
 
     input {
-      border: 1px solid #dddddd;
+      background: ${(props) => props.theme.colors.inputBackground} 0% 0%
+        no-repeat padding-box;
       height: 45px;
       border-radius: 4px;
-      color: #999999;
       padding: 10px;
       width: 100%;
     }
@@ -43,7 +43,7 @@ export const Content = styled.div`
 export const BoxContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: ${(props) => props.theme.colors.cardBackground};
   padding: 10px 30px 40px 30px;
   border-radius: 4px;
 `;
@@ -65,8 +65,8 @@ export const ImgContainer = styled.div`
     width: 150px;
     height: 150px;
     border-radius: 75px;
-    border: 2px dashed #7d40e7;
-    background: #f4effc;
+    border: 2px dashed ${(props) => props.theme.colors.primary};
+    background: ${(props) => props.theme.colors.background};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,7 +103,7 @@ export const ButtonsContainer = styled.div`
 `;
 
 export const BackButton = styled.button`
-  background: #cccccc;
+  background: ${(props) => props.theme.colors.button};
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -116,7 +116,7 @@ export const BackButton = styled.button`
   justify-content: center;
 
   &:hover {
-    background: ${darken(0.03, '#cccccc')};
+    background: ${(props) => darken(0.03, props.theme.colors.button)};
   }
 `;
 

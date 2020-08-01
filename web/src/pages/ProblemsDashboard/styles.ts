@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
 import { MdSearch } from 'react-icons/md';
 
 export const Container = styled.div`

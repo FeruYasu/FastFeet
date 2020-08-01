@@ -1,23 +1,49 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import logo from '../../assets/fastfeet-logo.png';
+import logo from '../../assets/logoFF.png';
+import theme from '../../styles/themes';
 
 import { Container, Content, Profile, Name } from './styles';
 import { useAuth } from '../../hooks/Auth';
+import Switch from '../Switch';
 
 const Header: React.FC = () => {
-  const { signOut } = useAuth();
+  const { signOut, themeContext, setTheme } = useAuth();
+  const [checkTheme, setCheckTheme] = useState(false);
+
+  useEffect(() => {
+    if (themeContext === theme.light) {
+      setCheckTheme(false);
+    } else {
+      setCheckTheme(true);
+    }
+  }, [themeContext]);
 
   const handleLogout = useCallback(() => {
     signOut();
   }, [signOut]);
 
+  const handleToggleTheme = useCallback(() => {
+    if (checkTheme === true) {
+      setCheckTheme(false);
+      setTheme(theme.light);
+    } else {
+      setCheckTheme(true);
+      setTheme(theme.dark);
+    }
+  }, [checkTheme, setTheme]);
+
   return (
     <Container>
       <Content>
         <nav>
-          <img src={logo} alt="Logo da Fastfeet" />
+          <div>
+            <img src={logo} alt="Logo da Fastfeet" />
+            <h1>
+              <strong>FAST</strong>FEET
+            </h1>
+          </div>
           <NavLink to="/deliveries" activeClassName="main-nav-active">
             ENCOMENDAS
           </NavLink>
@@ -33,6 +59,11 @@ const Header: React.FC = () => {
         </nav>
 
         <aside>
+          <Switch
+            id="themeswitch"
+            onChange={handleToggleTheme}
+            checked={checkTheme}
+          />
           <Profile>
             <div>
               <Name>Admin FastFeet</Name>

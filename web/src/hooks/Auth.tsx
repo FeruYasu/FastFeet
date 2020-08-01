@@ -1,5 +1,8 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
+import { DefaultTheme } from 'styled-components';
 import api from '../services/api';
+
+import themes from '../styles/themes';
 
 interface User {
   id: string;
@@ -21,6 +24,8 @@ interface AuthContextData {
   user: User;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
+  themeContext: DefaultTheme;
+  setTheme(theme: DefaultTheme): void;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -36,6 +41,8 @@ function useAuth(): AuthContextData {
 }
 
 const AuthProvider: React.FC = ({ children }) => {
+  const [themeContext, setTheme] = useState<DefaultTheme>(themes.light);
+
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@FastFeet:token');
     const user = localStorage.getItem('@FastFeet:user');
@@ -78,6 +85,8 @@ const AuthProvider: React.FC = ({ children }) => {
         user: data.user,
         signIn,
         signOut,
+        themeContext,
+        setTheme,
       }}
     >
       {children}

@@ -8,16 +8,8 @@ export const Container = styled.div`
   height: 100vh;
   justify-content: center;
   align-items: center;
-`;
-
-export const ImageContainer = styled.div`
-  height: 600px;
-
-  img {
-    max-height: 100%;
-    margin-left: 150px;
-    border-radius: 20px;
-  }
+  position: relative;
+  overflow: hidden;
 `;
 
 export const Content = styled.div`
@@ -26,11 +18,21 @@ export const Content = styled.div`
   width: 360px;
   height: 425px;
   text-align: center;
-  background: #ffffff;
+  background: ${(props) => props.theme.colors.cardBackground};
   box-shadow: 0px 0px 10px #00000033;
   border-radius: 4px;
   justify-content: center;
   align-items: center;
+  z-index: 1;
+
+  h1 {
+    font-style: italic;
+    color: ${(props) => props.theme.colors.title};
+
+    strong {
+      color: ${(props) => props.theme.colors.accent};
+    }
+  }
 
   img {
     max-width: 400px;
@@ -61,11 +63,9 @@ export const Content = styled.div`
   }
 `;
 
-export const Label = styled.p`
-  color: #444444;
-  text-align: start;
-  width: 300px;
-  padding: 15px 5px;
-  font-size: 14px;
-  font-weight: 700;
+export const BackgroundImage = styled.img`
+  position: absolute;
+  top: 0;
+  left: 10%;
+  max-height: 800px;
 `;

@@ -25,7 +25,6 @@ export const Content = styled.div`
 
     p {
       color: ${(props) => props.theme.colors.title};
-
       font-weight: bold;
       margin-top: 20px;
       margin-bottom: 10px;
@@ -34,10 +33,8 @@ export const Content = styled.div`
     input {
       background: ${(props) => props.theme.colors.inputBackground} 0% 0%
         no-repeat padding-box;
-      border: 1px solid #dddddd;
       height: 45px;
       border-radius: 4px;
-      color: #999999;
       padding: 10px;
       width: 100%;
     }
@@ -70,7 +67,7 @@ export const ButtonsContainer = styled.div`
 `;
 
 export const BackButton = styled.button`
-  background: #cccccc;
+  background: ${(props) => props.theme.colors.button};
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -83,7 +80,7 @@ export const BackButton = styled.button`
   justify-content: center;
 
   &:hover {
-    background: ${darken(0.03, '#cccccc')};
+    background: ${(props) => darken(0.03, props.theme.colors.button)};
   }
 `;
 

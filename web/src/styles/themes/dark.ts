@@ -11,7 +11,7 @@ export default {
     title: '#e0e0e0',
     text: '#cfcfcf',
     cardBackground: '#404040',
-    calendar: '#ababab',
+    button: '#404040',
     inputBackground: '#1a1a1a',
     card: '#595959',
     cardtext: '#525252',

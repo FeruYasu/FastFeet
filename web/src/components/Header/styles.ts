@@ -18,11 +18,23 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
 
-    img {
-      margin-right: 20px;
-      padding-right: 20px;
-      border-right: 2px solid #eee;
-      height: 26px;
+    div {
+      display: flex;
+      img {
+        height: 26px;
+        margin-right: 5px;
+      }
+
+      h1 {
+        margin-right: 20px;
+        padding-right: 20px;
+        border-right: 2px solid #eee;
+        font-style: italic;
+        color: ${(props) => props.theme.colors.title};
+        strong {
+          color: ${(props) => props.theme.colors.accent};
+        }
+      }
     }
 
     a {
