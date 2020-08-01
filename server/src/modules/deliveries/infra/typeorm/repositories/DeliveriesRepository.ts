@@ -45,6 +45,7 @@ class DeliveriesRepository implements IDeliveriesRepository {
       where: {
         courier_id,
       },
+      relations: ['recipient'],
     });
 
     return deliveryList;

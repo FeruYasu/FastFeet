@@ -10,7 +10,7 @@ courierSessionsRouter.post(
   '/',
   celebrate({
     [Segments.BODY]: {
-      id: Joi.number().required(),
+      email: Joi.string().required(),
     },
   }),
   sessionsController.create,

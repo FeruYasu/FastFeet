@@ -8,7 +8,7 @@ import ICouriersRepository from '../repositories/ICouriersRepository';
 import Courier from '../infra/typeorm/entities/Courier';
 
 interface IRequest {
-  id: number;
+  email: string;
 }
 
 interface IResponse {
@@ -23,19 +23,17 @@ class AuthenticateCourierService {
     private courierRepository: ICouriersRepository,
   ) {}
 
-  public async execute({ id }: IRequest): Promise<IResponse> {
-    const courier = await this.courierRepository.findById(id);
-
-    console.log(courier);
+  public async execute({ email }: IRequest): Promise<IResponse> {
+    const courier = await this.courierRepository.findByEmail(email);
 
     if (!courier) {
-      throw new AppError('Incorrect id.', 401);
+      throw new AppError('Incorrect email.', 401);
     }
 
     const { secret, expiresIn } = authConfig.jwt;
 
     const token = sign({}, secret, {
-      subject: String(courier.id),
+      subject: String(courier.email),
       expiresIn,
     });
 
