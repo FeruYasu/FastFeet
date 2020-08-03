@@ -7,8 +7,11 @@ import {
   OneToOne,
 } from 'typeorm';
 
+import uploadConfig from '@config/upload';
+
 import Recipient from '@modules/recipients/infra/typeorm/entities/Recipient';
 import Courier from '@modules/couriers/infra/typeorm/entities/Courier';
+import { Expose } from 'class-transformer';
 
 @Entity('deliveries')
 class Delivery {
@@ -31,6 +34,20 @@ class Delivery {
 
   @Column()
   signature: string;
+
+  @Expose({ name: 'signature_url' })
+  getSignatureUrl(): string | null {
+    if (!this.signature) {
+      return null;
+    }
+
+    switch (uploadConfig.driver) {
+      case 'disk':
+        return `${process.env.APP_API_URL}/files/${this.signature}`;
+      default:
+        return null;
+    }
+  }
 
   @Column()
   product: string;

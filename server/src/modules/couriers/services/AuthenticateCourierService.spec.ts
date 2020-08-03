@@ -26,7 +26,7 @@ describe('Authenticate Courier Session', () => {
     });
 
     const response = await authenticateCourier.execute({
-      id: courier.id,
+      email: courier.email,
     });
 
     expect(response).toHaveProperty('token');
@@ -36,7 +36,7 @@ describe('Authenticate Courier Session', () => {
   it('should not be able to authenticate with nonexistent user', async () => {
     await expect(
       authenticateCourier.execute({
-        id: 22,
+        email: 'nonexistent@user.com.br',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
