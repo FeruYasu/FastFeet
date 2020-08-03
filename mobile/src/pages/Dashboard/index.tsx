@@ -38,11 +38,23 @@ const Dashboard: React.FC = () => {
     async function loadDeliveries(): Promise<void> {
       const response = await api.get(`/couriers/1/deliveries`);
 
-      setDeliveries(response.data);
+      if (statusPendente) {
+        const pendentOnly = response.data.filter((delivery) => {
+          return delivery.end_date === null;
+        });
+
+        setDeliveries(pendentOnly);
+      } else {
+        const deliveredList = response.data.filter((delivery) => {
+          return delivery.end_date !== null;
+        });
+
+        setDeliveries(deliveredList);
+      }
     }
 
     loadDeliveries();
-  }, [isFocused]);
+  }, [isFocused, statusPendente]);
 
   async function handlelistPendent(): Promise<void> {
     setStatusPendente(!statusPendente);
@@ -101,7 +113,7 @@ const Dashboard: React.FC = () => {
         }
       }
     },
-    [deliveries]
+    [deliveries, statusPendente]
   );
 
   return (

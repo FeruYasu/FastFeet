@@ -46,7 +46,7 @@ export const TextContainer = styled.View`
 `;
 
 export const FormContainer = styled(Form)`
-  margin-top: 30px;
+  margin-top: 20px;
   padding: 10px 20px;
 `;
 
