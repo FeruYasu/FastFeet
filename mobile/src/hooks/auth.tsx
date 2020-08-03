@@ -25,7 +25,7 @@ interface AuthState {
 }
 
 interface SignInCredentials {
-  id: number;
+  email: string;
 }
 
 interface AuthContextData {
@@ -87,9 +87,9 @@ const AuthProvider: React.FC = ({ children }) => {
     [setData, data.token]
   );
 
-  const signIn = useCallback(async ({ id }) => {
+  const signIn = useCallback(async ({ email }) => {
     const response = await api.post('/couriersessions', {
-      id,
+      email,
     });
 
     const { token, courier } = response.data;

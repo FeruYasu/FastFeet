@@ -4,7 +4,7 @@ export default {
 
   colors: {
     primary: '#6552cc',
-    accent: '#6552cc',
+    accent: '#a594ff',
     title: '#fff',
     header: '#000',
     progress: '#34c883',
@@ -12,7 +12,7 @@ export default {
     subtitle: '#d1d1d1',
     background: '#171717',
     cardBackground: '#242424',
-    cardIcon: '#6552cc',
+    cardIcon: '#a594ff',
     button: '#6552cc',
     buttonBorder: '#f2f1f7',
     buttonText: '#090e11',

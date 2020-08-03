@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Alert, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ImagePicker from 'react-native-image-picker';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import api from '../../services/api';
 import photo from '../../assets/delivered.png';
 import packageCheck from '../../assets/package-delivered.png';
@@ -22,10 +22,18 @@ import {
   ModalSubText,
 } from './styles';
 
+interface RouteParams {
+  data: {
+    id: number;
+  };
+}
+
 const ConfirmDelivery: React.FC = () => {
-  const [signature, setSignature] = useState<{ uri: string } | string>(photo);
+  const [signature, setSignature] = useState<{ uri: string }>(photo);
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
+  const route = useRoute();
+  const { data } = route.params as RouteParams;
 
   const handlePhoto = useCallback(() => {
     ImagePicker.showImagePicker(
@@ -44,23 +52,23 @@ const ConfirmDelivery: React.FC = () => {
           return;
         }
 
-        const data = new FormData();
-
-        data.append('avatar', {
-          type: 'image/jpeg',
-          name: `teste.jpg`,
-          uri: response.uri,
-        });
-
-        // api.patch('users/avatar', data).then((ApiResponse) => {
-        //   updateUser(ApiResponse.data);
-        // });
         const source = { uri: response.uri };
         setSignature(source);
-        setModalVisible(!modalVisible);
       }
     );
   }, []);
+
+  const handleSend = useCallback(() => {
+    const photoData = new FormData();
+
+    photoData.append('signature', {
+      type: 'image/jpeg',
+      name: `product-${data.id}.jpg`,
+      uri: signature.uri,
+    });
+
+    api.post(`/deliveries/confirm/${data.id}`, photoData);
+  }, [data.id, signature.uri]);
 
   return (
     <>
@@ -76,6 +84,7 @@ const ConfirmDelivery: React.FC = () => {
           </ExplanationText>
           <ConfirmButton
             onPress={() => {
+              handleSend();
               setModalVisible(true);
             }}
           >

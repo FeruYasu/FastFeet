@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -14,7 +14,6 @@ import {
   Line,
   StatusLabel,
   Label,
-  DetailsContainer,
   DetailsButton,
   DetailsButtonText,
 } from './styles';
@@ -42,13 +41,15 @@ const Delivery: React.FC<DeliveryData> = ({ data }) => {
 
   const navigation = useNavigation();
 
-  if (data.start_date) {
-    setStatusRetirado(true);
-  }
+  useEffect(() => {
+    if (data.start_date) {
+      setStatusRetirado(true);
+    }
 
-  if (data.end_date) {
-    setStatusEntregue(true);
-  }
+    if (data.end_date) {
+      setStatusEntregue(true);
+    }
+  }, [data.start_date, data.end_date]);
 
   return (
     <Container>

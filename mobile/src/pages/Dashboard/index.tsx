@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useNavigation } from '@react-navigation/native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { useAuth } from '../../hooks/auth';
 
 import api from '../../services/api';
@@ -33,7 +32,7 @@ const Dashboard: React.FC = () => {
   const { user, signOut, theme } = useAuth();
   const [statusPendente, setStatusPendente] = useState(true);
   const [deliveries, setDeliveries] = useState([]);
-  const [filter, setFilter] = useState();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     async function loadDeliveries(): Promise<void> {
@@ -43,33 +42,26 @@ const Dashboard: React.FC = () => {
     }
 
     loadDeliveries();
-  }, []);
+  }, [isFocused]);
 
   async function handlelistPendent(): Promise<void> {
     setStatusPendente(!statusPendente);
-    const { data } = await api.get(`/couriers/1/deliveries`);
-    const newList = data.filter((delivery) => {
-      if (delivery.start_date === null) {
-        return delivery;
-      }
-      return delivery;
+    const response = await api.get(`/couriers/1/deliveries`);
+    const pendentOnly = response.data.filter((delivery) => {
+      return delivery.end_date === null;
     });
 
-    setDeliveries(newList);
+    setDeliveries(pendentOnly);
   }
 
   async function handleListDelivered(): Promise<void> {
     setStatusPendente(!statusPendente);
-    const { data } = await api.get(`/couriers/1/deliveries`);
-
-    const newList = data.filter((delivery) => {
-      if (delivery.end_date !== null) {
-        return delivery;
-      }
-      return delivery;
+    const response = await api.get(`/couriers/1/deliveries`);
+    const deliveredList = response.data.filter((delivery) => {
+      return delivery.end_date !== null;
     });
 
-    setDeliveries(newList);
+    setDeliveries(deliveredList);
   }
 
   const handleLogout = useCallback(() => {
@@ -80,6 +72,37 @@ const Dashboard: React.FC = () => {
   const navigateToProfile = useCallback(() => {
     navigation.navigate('Profile');
   }, [navigation]);
+
+  const handleFilter = useCallback(
+    async (value) => {
+      const filteredList = deliveries.filter((delivery) => {
+        return delivery.recipient.street.includes(value);
+      });
+
+      if (filteredList) {
+        setDeliveries(filteredList);
+      }
+
+      if (value === '') {
+        const response = await api.get(`/couriers/1/deliveries`);
+
+        if (statusPendente) {
+          const pendentOnly = response.data.filter((delivery) => {
+            return delivery.end_date === null;
+          });
+
+          setDeliveries(pendentOnly);
+        } else {
+          const deliveredList = response.data.filter((delivery) => {
+            return delivery.end_date !== null;
+          });
+
+          setDeliveries(deliveredList);
+        }
+      }
+    },
+    [deliveries]
+  );
 
   return (
     <Container>
@@ -116,8 +139,8 @@ const Dashboard: React.FC = () => {
       </Header>
 
       <Input
-        value={filter}
         placeholder="Filtrar por bairro"
+        onChangeText={(text) => handleFilter(text)}
         placeholderTextColor={theme.colors.inputPlaceholder}
       />
 

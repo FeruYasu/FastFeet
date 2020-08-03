@@ -1,19 +1,19 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { Image, Alert } from 'react-native';
+import { KeyboardAvoidingView, Alert, Platform } from 'react-native';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import Input from '../../components/Input';
 
 import { useAuth } from '../../hooks/auth';
 
-import logofastfeet from '../../assets/logofastfeet.jpg';
-import logoff from '../../assets/logoff.png';
-import backgroundImage from '../../assets/placeholder.png';
+import logoff from '../../assets/logoFFx1.png';
+import backgroundImage from '../../assets/backgroundFF.png';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import {
   Container,
+  TopContainer,
   TextContainer,
   LogoContainer,
   LogoIcon,
@@ -28,7 +28,7 @@ import {
 } from './styles';
 
 interface SignInFormData {
-  id: number;
+  email: string;
 }
 
 const SignIn: React.FC = () => {
@@ -42,12 +42,12 @@ const SignIn: React.FC = () => {
       try {
         formRef.current?.setErrors({});
         const schema = Yup.object().shape({
-          id: Yup.number().required('Digite um ID'),
+          email: Yup.string().required('Digite um email valido'),
         });
 
         await schema.validate(data, { abortEarly: false });
         await signIn({
-          id: data.id,
+          email: data.email,
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -68,52 +68,57 @@ const SignIn: React.FC = () => {
   );
 
   return (
-    <Container>
-      <BackgroundImage source={backgroundImage}>
-        <LogoContainer>
-          <LogoIcon source={logoff} />
-          <Image source={logofastfeet} />
-        </LogoContainer>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
+      <Container>
+        <TopContainer>
+          <BackgroundImage source={backgroundImage} />
+          <LogoContainer>
+            <LogoIcon source={logoff} />
+            <YellowText>
+              FAST<Text>FEET</Text>
+            </YellowText>
+          </LogoContainer>
 
-        <TextContainer>
-          <YellowText>Entregador,</YellowText>
-          <Text>você é nosso {'\n'}maior valor</Text>
-          <SmallText>Faça seu login para {'\n'}começar suas entregas</SmallText>
-        </TextContainer>
-      </BackgroundImage>
+          <TextContainer>
+            <YellowText>Entregador,</YellowText>
+            <Text>você é nosso {'\n'}maior valor</Text>
+            <SmallText>
+              Faça seu login para {'\n'}começar suas entregas
+            </SmallText>
+          </TextContainer>
+        </TopContainer>
 
-      <FormContainer ref={formRef} onSubmit={handleSubmit}>
-        <Input
-          keyboardType="numeric"
-          name="id"
-          icon="user-alt"
-          placeholder="Informe seu ID de cadastro"
-        />
+        <FormContainer ref={formRef} onSubmit={handleSubmit}>
+          <Input name="email" icon="user-alt" placeholder="Email" />
 
-        <Input
-          secureTextEntry={secureText}
-          name="password"
-          icon="lock"
-          password
-          placeholder="Sua senha"
-          handleSecureText={() => {
-            setSecureText(!secureText);
-          }}
-        />
+          <Input
+            secureTextEntry={secureText}
+            name="password"
+            icon="lock"
+            password
+            placeholder="Sua senha"
+            handleSecureText={() => {
+              setSecureText(!secureText);
+            }}
+          />
 
-        <SubmitButton
-          onPress={() => {
-            formRef.current?.submitForm();
-          }}
-        >
-          Entrar
-        </SubmitButton>
+          <SubmitButton
+            onPress={() => {
+              formRef.current?.submitForm();
+            }}
+          >
+            Entrar
+          </SubmitButton>
 
-        <ForgotPassword>
-          <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
-        </ForgotPassword>
-      </FormContainer>
-    </Container>
+          <ForgotPassword>
+            <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
+          </ForgotPassword>
+        </FormContainer>
+      </Container>
+    </KeyboardAvoidingView>
   );
 };
 

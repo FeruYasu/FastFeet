@@ -12,22 +12,31 @@ export const Container = styled.View`
   justify-content: space-evenly;
 `;
 
-export const BackgroundImage = styled(ImageBackground)`
+export const TopContainer = styled.View`
   display: flex;
   height: 40%;
   width: 100%;
   justify-content: center;
   padding: 0 30px;
+  position: relative;
+`;
+
+export const BackgroundImage = styled.Image`
+  margin-left: -150px;
+  position: absolute;
 `;
 
 export const LogoContainer = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 100px;
   margin-bottom: 50px;
 `;
 
-export const LogoIcon = styled.Image``;
+export const LogoIcon = styled.Image`
+  margin-top: -15px;
+`;
 
 export const TextContainer = styled.View`
   display: flex;
@@ -37,6 +46,7 @@ export const TextContainer = styled.View`
 `;
 
 export const FormContainer = styled(Form)`
+  margin-top: 30px;
   padding: 10px 20px;
 `;
 

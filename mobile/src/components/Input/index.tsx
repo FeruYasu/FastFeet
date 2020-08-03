@@ -16,8 +16,8 @@ interface InputProps extends TextInputProps {
   name: string;
   icon: string;
   password?: boolean;
-  handleSecureText();
-  containerStyle?: {};
+  handleSecureText?();
+  containerStyle?: Record<string, unknown>;
 }
 
 interface InputValueReference {
@@ -38,7 +38,6 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
   const inputValueRef = useRef<InputValueReference>({ value: defaultValue });
 
   const [isFocused, setIsFocused] = useState(false);
-  const [isFilled, setIsFilled] = useState(false);
 
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
@@ -46,7 +45,6 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
 
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
-    setIsFilled(!!inputValueRef.current.value);
   }, []);
 
   useImperativeHandle(ref, () => ({

@@ -76,9 +76,9 @@ export const ImageIcon = styled.Image`
 
 export const ModalText = styled.Text`
   font-size: 30px;
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.title};
 `;
 
 export const ModalSubText = styled.Text`
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.title};
 `;
