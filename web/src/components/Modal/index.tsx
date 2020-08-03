@@ -1,5 +1,5 @@
 import React from 'react';
-import { format } from 'date-fns';
+import { format, parse, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import { Container, ModalBackground, ModalContent } from './styles';
@@ -13,9 +13,10 @@ interface recipient {
 }
 
 interface Data {
-  start_date?: Date;
-  end_date?: Date;
+  start_date?: string;
+  end_date?: string;
   recipient: recipient;
+  signature_url?: string;
 }
 
 interface ModalProps {
@@ -27,14 +28,16 @@ const Modal: React.FC<ModalProps> = ({ data, handleView }) => {
   let startDate = null;
   let endDate = null;
 
+  console.log(data);
+
   if (data.start_date) {
-    startDate = format(data.start_date, "dd'/'MM'/'yy", {
+    startDate = format(parseISO(data.start_date), "dd'/'MM'/'yy", {
       locale: pt,
     });
   }
 
   if (data.end_date) {
-    endDate = format(data.end_date, "dd'/'MM'/'yy", {
+    endDate = format(parseISO(data.end_date), "dd'/'MM'/'yy", {
       locale: pt,
     });
   }
@@ -63,7 +66,7 @@ const Modal: React.FC<ModalProps> = ({ data, handleView }) => {
         </p>
         <hr />
         <h4>Assinatura do destinatário</h4>
-        <img src="" alt="" />
+        <img src={data.signature_url} alt="" />
       </ModalContent>
     </Container>
   );

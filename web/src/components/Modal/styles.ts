@@ -21,7 +21,7 @@ export const ModalBackground = styled.div`
 `;
 
 export const ModalContent = styled.div`
-  background: #fff;
+  background: ${(props) => props.theme.colors.header};
   opacity: 1;
   position: fixed;
   display: flex;
@@ -35,6 +35,18 @@ export const ModalContent = styled.div`
   h4 {
     font-size: 14px;
     margin-bottom: 10px;
+  }
+
+  h4 {
+    color: ${(props) => props.theme.colors.title};
+  }
+
+  img {
+    max-width: 230px;
+    max-height: 250px;
+    width: auto;
+    height: auto;
+    margin: auto;
   }
 
   hr {

@@ -35,8 +35,8 @@ interface Delivery {
   };
   status: 'Entregue' | 'Cancelado' | 'Retirado' | 'Pendente';
   courierInitials: string;
-  start_date?: Date;
-  end_date?: Date;
+  start_date?: string;
+  end_date?: string;
 }
 
 const DeliveriesDashboard: React.FC = () => {
