@@ -7,8 +7,8 @@ import * as Yup from 'yup';
 import { FiMail, FiLock } from 'react-icons/fi';
 
 import { Form } from '@unform/web';
-
 import logo from '../../assets/logoFF.png';
+
 import backgroudLogo from '../../assets/backgroundFF.svg';
 import getValidationErrors from '../../utils/getValidationErrors';
 

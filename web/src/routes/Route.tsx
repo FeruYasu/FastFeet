@@ -11,6 +11,7 @@ import { useAuth } from '../hooks/Auth';
 interface RouteProps extends ReactDOMRouteProps {
   isPrivate?: boolean;
   component: React.ComponentType;
+  socket?: SocketIOClient.Socket;
 }
 
 const Route: React.FC<RouteProps> = ({

@@ -1,7 +1,15 @@
-import React, { useState, useEffect, useCallback, ChangeEvent } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  ChangeEvent,
+  useMemo,
+} from 'react';
 
 import { Link } from 'react-router-dom';
 import { MdAdd, MdMoreHoriz } from 'react-icons/md';
+import socketio from 'socket.io-client';
+import { userInfo } from 'os';
 import api from '../../services/api';
 import Header from '../../components/Header';
 import Actions from '../../components/Actions';
@@ -16,6 +24,7 @@ import {
   Status,
   IconSearch,
 } from './styles';
+import { useAuth } from '../../hooks/Auth';
 
 interface Delivery {
   id: number;
@@ -44,6 +53,8 @@ const DeliveriesDashboard: React.FC = () => {
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(0);
   const [modalopen, setModalOpen] = useState(0);
+
+  const { user } = useAuth();
 
   const statusCheck = useCallback((delivery) => {
     let status = 'Pendente';
@@ -122,6 +133,57 @@ const DeliveriesDashboard: React.FC = () => {
   const handleFilter = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
   }, []);
+
+  const socket = useMemo(() => {
+    return socketio('http://localhost:3333', {
+      query: {
+        user_id: user.id,
+      },
+    });
+  }, [user.id]);
+
+  useEffect(() => {
+    socket.on('newDelivery', () => {
+      async function loadDeliveries(): Promise<void> {
+        const response = await api.get('/deliveries', {
+          params: {
+            product: query,
+          },
+        });
+
+        const data = response.data.map((delivery: Delivery) => ({
+          ...delivery,
+          status: statusCheck(delivery),
+          courierInitials: delivery.courier.name.match(/\b\w/g) || [].join(''),
+        }));
+
+        setDeliveries(data);
+      }
+
+      loadDeliveries();
+    });
+
+    socket.on('newDeliveryConfirmation', () => {
+      console.log('novaconfirmação');
+      async function loadDeliveries(): Promise<void> {
+        const response = await api.get('/deliveries', {
+          params: {
+            product: query,
+          },
+        });
+
+        const data = response.data.map((delivery: Delivery) => ({
+          ...delivery,
+          status: statusCheck(delivery),
+          courierInitials: delivery.courier.name.match(/\b\w/g) || [].join(''),
+        }));
+
+        setDeliveries(data);
+      }
+
+      loadDeliveries();
+    });
+  }, [socket, query, statusCheck]);
 
   return (
     <>

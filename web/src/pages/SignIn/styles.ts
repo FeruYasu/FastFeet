@@ -15,8 +15,8 @@ export const Container = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  width: 360px;
-  height: 425px;
+  width: 380px;
+  height: 450px;
   text-align: center;
   background: ${(props) => props.theme.colors.cardBackground};
   box-shadow: 0px 0px 10px #00000033;
