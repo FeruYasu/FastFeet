@@ -41,7 +41,7 @@ Technologies used in this project:
   <img src="https://res.cloudinary.com/feruyasu/image/upload/v1596485293/github/fastfeet/home_dark_pxutdq.jpg" height="400">
   <img src="https://res.cloudinary.com/feruyasu/image/upload/v1596485293/github/fastfeet/details_dark_ylok3j.jpg" height="400">
   <img src="https://res.cloudinary.com/feruyasu/image/upload/v1596485293/github/fastfeet/profile_dark_qmng0j.jpg" height="400">
-  <img src="https://res.cloudinary.com/feruyasu/image/upload/v1596485293/github/fastfeet/profile_dark_qmng0j.jpg" height="400">
+  <img src="https://res.cloudinary.com/feruyasu/image/upload/v1596485293/github/fastfeet/confirm_dark_eiludf.jpg" height="400">
  </p>
  
  <p align="center">
