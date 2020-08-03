@@ -11,7 +11,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@types/cors": "^2.8.6",
     "bcryptjs": "^2.4.3",
     "celebrate": "^12.1.1",
     "class-transformer": "^0.2.3",
@@ -22,11 +21,14 @@
     "multer": "^1.4.2",
     "pg": "^8.2.1",
     "reflect-metadata": "^0.1.13",
+    "socket.io": "^2.3.0",
     "tsyringe": "^4.3.0",
     "typeorm": "^0.2.25",
     "uuidv4": "^6.1.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.6",
+    "@types/socket.io": "^2.1.10",
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.6",
     "@types/jest": "^26.0.3",

@@ -13,6 +13,7 @@ import { classToClass } from 'class-transformer';
 export default class DeliveriesController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { recipient_id, courier_id, product } = request.body;
+    const { io } = request;
 
     const createDelivery = container.resolve(CreateDeliveryService);
 
@@ -21,6 +22,8 @@ export default class DeliveriesController {
       courier_id,
       product,
     });
+
+    io.sockets.emit('newDelivery', product);
 
     return response.json(delivery);
   }

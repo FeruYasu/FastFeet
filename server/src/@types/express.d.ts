@@ -6,5 +6,18 @@ declare namespace Express {
     courier: {
       id: string;
     };
+    io: {
+      to: Function;
+      sockets: {
+        in: Function;
+        emit: Function;
+      };
+    };
+    socket: {
+      broadcast: string;
+    };
+    connectedUsers: {
+      [key: string]: string;
+    };
   }
 }

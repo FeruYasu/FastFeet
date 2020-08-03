@@ -7,15 +7,17 @@ import { classToClass } from 'class-transformer';
 export default class ConfirmDeliveryController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { filename } = request.file;
-
-    console.log(filename);
+    const { io } = request;
+    const { id } = request.params;
 
     const confirmDelivery = container.resolve(ConfirmDeliveryService);
 
     const delivery = await confirmDelivery.execute({
-      product_id: Number(request.params.id),
+      product_id: Number(id),
       photoFilename: filename,
     });
+
+    io.sockets.emit('newDeliveryConfirmation', id);
 
     return response.json(classToClass(delivery));
   }

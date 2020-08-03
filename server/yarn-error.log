@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @types/class-transformer
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @types/socket-io
 
 PATH: 
-  C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\Git\cmd;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\Ferna\AppData\Local\Microsoft\WindowsApps;C:\Users\Ferna\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Ferna\AppData\Roaming\npm;C:\Users\Ferna\AppData\Local\Yarn\bin;C:\Users\Ferna\AppData\Local\Android\Sdk\platform-tools;C:\Users\Ferna\AppData\Local\Android\Sdk\tools;C:\Users\Ferna\AppData\Local\GitHubDesktop\bin;C:\Program Files\OpenSSL-Win64\bin;C:\Users\Ferna\sonar-scanner-cli-4.3.0.2102-windows\sonar-scanner-4.3.0.2102-windows\bin;;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps
+  C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Git\cmd;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\Ferna\AppData\Local\Microsoft\WindowsApps;C:\Users\Ferna\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Ferna\AppData\Roaming\npm;C:\Users\Ferna\AppData\Local\Yarn\bin;C:\Users\Ferna\AppData\Local\Android\Sdk\platform-tools;C:\Users\Ferna\AppData\Local\Android\Sdk\tools;C:\Users\Ferna\AppData\Local\GitHubDesktop\bin;C:\Program Files\OpenSSL-Win64\bin;C:\Users\Ferna\sonar-scanner-cli-4.3.0.2102-windows\sonar-scanner-4.3.0.2102-windows\bin;;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps
 
 Yarn version: 
   1.22.0
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fclass-transformer: Not found
+  Error: https://registry.yarnpkg.com/@types%2fsocket-io: Not found
       at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66084:18)
       at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140727:22)
       at Request.emit (events.js:321:20)
@@ -51,6 +51,7 @@ npm manifest:
       "multer": "^1.4.2",
       "pg": "^8.2.1",
       "reflect-metadata": "^0.1.13",
+      "socket-io": "^1.0.0",
       "tsyringe": "^4.3.0",
       "typeorm": "^0.2.25",
       "uuidv4": "^6.1.1"
@@ -4953,6 +4954,11 @@ Lockfile:
       source-map "^0.5.6"
       source-map-resolve "^0.5.0"
       use "^3.1.0"
+  
+  socket-io@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/socket-io/-/socket-io-1.0.0.tgz#fc566f4d30a6370224d07e65dcef386bd8f5d296"
+    integrity sha1-/FZvTTCmNwIk0H5l3O84a9j10pY=
   
   source-map-resolve@^0.5.0:
     version "0.5.3"
